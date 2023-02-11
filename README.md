@@ -11,3 +11,8 @@ Run with Android
 ```
 yarn android
 ```
+Run with IOS
+```
+yarn ios
+```
+
