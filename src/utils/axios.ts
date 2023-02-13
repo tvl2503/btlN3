@@ -1,38 +1,28 @@
 import Config from 'react-native-config';
-import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+export const request = axios.create({
+  baseURL: Config.API_URL,
+  timeout: 10000,
+});
 
-class Http {
-    instance: AxiosInstance;
-    constructor() {
-      this.instance = axios.create({
-        baseURL: Config.API_URL,
-        timeout: 10000,
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      });
-    }
-}
-const AxiosClient = new Http().instance;
-AxiosClient.interceptors.request.use(
-    async (config) => {
-      try {
-        const token = await AsyncStorage.getItem('token');
-        if (token !== null) {
-          config.headers.Authorization = `Bearer ${token}`;
-        }
-        return config;
-      } catch (e) {
-        console.log(e);
-        console.log('error');
+const initInterceptor = () => {
+  request.interceptors.request.use(async request => {
+    try {
+      const token = await AsyncStorage.getItem('token');
+      if (!token) {
+        return request;
       }
-    },
-    error => {
-      console.log('loi');
-      return Promise.reject(error);
-    },
-);
-export default AxiosClient;
+      request.headers['Authorization'] = 'Bearer ' + token;
+      return request;
+    } catch (err) {
+      return request;
+    }
+  });
+  request.interceptors.response.use(response => {
+    return response.data;
+  });
+};
+
+export default initInterceptor;
