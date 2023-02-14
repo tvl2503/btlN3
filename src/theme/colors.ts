@@ -1,28 +1,16 @@
-export const colors = {
-    brand: {
-      primary: "#2182BD",
-      secondary: "#5282BD",
-      muted: "#C6DAF7",
-    },
-    ui: {
-      primary: "#262626",
-      secondary: "#757575",
-      tertiary: "#F1F1F1",
-      quaternary: "#FFFFFF",
-      disabled: "#DEDEDE",
-      error: "#D0421B",
-      success: "#138000",
-    },
-    bg: {
-      primary: "#FFFFFF",
-      secondary: "#F1F1F1",
-    },
-    text: {
-      primary: "#262626",
-      secondary: "#757575",
-      disabled: "#9C9C9C",
-      inverse: "#FFFFFF",
-      error: "#D0421B",
-      success: "#138000",
-    },
-  };
+export enum COLORS {
+  primary = '#1890FF',
+  secondary = '#3FBA95',
+  warning = '#EFBB45',
+  danger = '#EA3C71',
+  white = '#fff',
+  black = '#000000',
+  neutral_1 = '#100E0D',
+  neutral_2 = '#343231',
+  neutral_3 = '#636261',
+  neutral_4 = '#939292',
+  neutral_5 = '#C3C2C2',
+  neutral_6 = '#DBDBDB',
+  gray_6 = '#BFBFBF',
+  textfield = '#F2F2F2'
+};

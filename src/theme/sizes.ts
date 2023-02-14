@@ -1,1 +1,8 @@
-export const sizes = ["8px", "16px", "32px", "64px", "128px"];
+export enum sizes {
+  sm = '4px',
+  md = '8px',
+  lg = '12px',
+  xl = '16px',
+  xxl = '32px',
+  xxxl = '64px'
+};
