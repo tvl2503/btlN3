@@ -8,21 +8,26 @@ import { BUTTON_VARIANT } from './src/constants/theme/button';
 import Input from './src/core/Input';
 import { View } from 'react-native';
 import Typography from './src/core/Typography';
+import CheckBox from './src/core/CheckBox';
+import PortalProvider from './src/core/Portal/PortalProvider';
 
 function App(): JSX.Element {
   return (
-    <SafeArea>
-      <View style={{ padding: 16 }}>
-        <ThemeProvider theme={theme}>
-          <AppNavigator />
-          <Button variant={BUTTON_VARIANT.danger}>Test</Button>
-          <Input placeholder="Test" />
-          <Typography>
-            Test Typography
-          </Typography>
-        </ThemeProvider>
-      </View>
-    </SafeArea>
+    <>
+      <PortalProvider>
+        {/* <SafeArea> */}
+          {/* <View style={{ padding: 16 }}> */}
+            <ThemeProvider theme={theme}>
+              <AppNavigator />
+              {/* <Button variant={BUTTON_VARIANT.danger}>Test</Button>
+              <Input placeholder="Test" />
+              <Typography>Test Typography</Typography>
+              <CheckBox/> */}
+            </ThemeProvider>
+          {/* </View>
+        </SafeArea> */}
+      </PortalProvider>
+    </>
   );
 }
 
