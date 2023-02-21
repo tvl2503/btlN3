@@ -14,19 +14,19 @@ import PortalProvider from './src/core/Portal/PortalProvider';
 function App(): JSX.Element {
   return (
     <>
-      <PortalProvider>
-        {/* <SafeArea> */}
+      <ThemeProvider theme={theme}>
+        <PortalProvider>
+          {/* <SafeArea> */}
           {/* <View style={{ padding: 16 }}> */}
-            <ThemeProvider theme={theme}>
-              <AppNavigator />
-              {/* <Button variant={BUTTON_VARIANT.danger}>Test</Button>
+          <AppNavigator />
+          {/* <Button variant={BUTTON_VARIANT.text}>Test</Button>
               <Input placeholder="Test" />
               <Typography>Test Typography</Typography>
               <CheckBox/> */}
-            </ThemeProvider>
           {/* </View>
         </SafeArea> */}
-      </PortalProvider>
+        </PortalProvider>
+      </ThemeProvider>
     </>
   );
 }

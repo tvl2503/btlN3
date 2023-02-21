@@ -13,4 +13,5 @@ export interface ButtonProps extends TouchableOpacityProps, AliasComponent {
   size?: BUTTON_SIZE;
   variant?: BUTTON_VARIANT;
   fullWidth?: boolean;
+  color?: BUTTON_VARIANT;
 }
