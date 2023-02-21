@@ -9,6 +9,7 @@ import Portal from '../core/Portal';
 import Modal from '../core/Modal';
 import Button from '../core/Button';
 import { Modalize } from 'react-native-modalize';
+import Card from '../core/Card';
 const Stack = createNativeStackNavigator();
 
 const Home = ({navigation}) => {
@@ -31,6 +32,9 @@ const Another = () => {
         </Modal>
       </Portal>
       <Button onPress={() => ref.current?.open()}>Hello</Button>
+      <Card>
+        <Text>Test</Text>
+      </Card>
     </View>
   )
 }

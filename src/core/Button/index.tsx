@@ -6,10 +6,10 @@ import { BUTTON_VARIANT } from '../../constants/theme/button';
 import { TouchableOpacity } from 'react-native/types';
 
 const Button = forwardRef<TouchableOpacity, ButtonProps>((props, ref) => {
-  const { children, size, as, ...restProps } = props;
+  const { children, size, as, variant, ...restProps } = props;
   return (
-    <TouchableOpacityComposed ref={ref} size={size} {...restProps}>
-      <TextButtonComposed as={as}>{children}</TextButtonComposed>
+    <TouchableOpacityComposed variant={variant} ref={ref} size={size} {...restProps}>
+      <TextButtonComposed variant={variant} as={as}>{children}</TextButtonComposed>
     </TouchableOpacityComposed>
   );
 });

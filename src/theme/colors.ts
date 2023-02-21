@@ -13,5 +13,6 @@ export enum COLORS {
   neutral_6 = '#DBDBDB',
   gray_6 = '#BFBFBF',
   textfield = '#F2F2F2',
-  lightdark = '#F6F6F6'
+  lightdark = '#F6F6F6',
+  transparent = 'transparent'
 };

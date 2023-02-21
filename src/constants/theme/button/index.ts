@@ -4,13 +4,23 @@ export enum BUTTON_VARIANT {
   primary = 'primary',
   secondary = 'secondary',
   danger = 'danger',
-  warning = 'warning'
+  warning = 'warning',
+  icon = 'icon',
+  text = 'text'
 }
 export enum BUTTON_THEME {
   primary = COLORS.primary,
   secondary = COLORS.secondary,
   danger = COLORS.danger,
   warning = COLORS.warning,
+  icon = COLORS.transparent,
+  text = COLORS.transparent
+}
+
+export const BUTTON_ICON_SIZE = {
+  lg: '44px',
+  md: '36px',
+  sm: '32px',
 };
 
 export const BUTTON_SIZE_PADDING = {
