@@ -1,0 +1,1 @@
+export const CARD_RADIUS = '4px';
