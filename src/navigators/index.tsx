@@ -12,9 +12,14 @@ import { Modalize } from 'react-native-modalize';
 import Card from '../core/Card';
 import Tree from '../core/Tree';
 import TreeItem from '../core/Tree/TreeItem';
+import useQuery from '../hook/useQuery';
+
 const Stack = createNativeStackNavigator();
 
 const Home = ({navigation}) => {
+  const { data } = useQuery({
+    url: 'https://jsonplaceholder.typicode.com/posts',
+  });
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Pressable onPress={() => navigation.navigate('abc')}>
@@ -26,6 +31,9 @@ const Home = ({navigation}) => {
 
 const Another = () => {
   const ref = useRef<Modalize>(null);
+   const { data } = useQuery({
+    url: 'https://jsonplaceholder.typicode.com/posts',
+  });
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Portal>
