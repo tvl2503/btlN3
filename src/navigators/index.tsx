@@ -10,9 +10,13 @@ import Modal from '../core/Modal';
 import Button from '../core/Button';
 import { Modalize } from 'react-native-modalize';
 import Card from '../core/Card';
+import useQuery from '../hook/useQuery';
 const Stack = createNativeStackNavigator();
 
 const Home = ({navigation}) => {
+  const { data } = useQuery({
+    url: 'https://jsonplaceholder.typicode.com/posts',
+  });
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Pressable onPress={() => navigation.navigate('abc')}>
@@ -24,6 +28,9 @@ const Home = ({navigation}) => {
 
 const Another = () => {
   const ref = useRef<Modalize>(null);
+   const { data } = useQuery({
+    url: 'https://jsonplaceholder.typicode.com/posts',
+  });
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Portal>
