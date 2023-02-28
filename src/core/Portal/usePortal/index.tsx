@@ -10,7 +10,6 @@ const usePortal = () => {
   const mounted = useCallback((key: string, children: ReactNode) => {
     setChildrens(prevState => [...prevState, { key, children }]);
   }, []);
-  console.log(childrens);
 
   const unmount = (key?: string) => {
     if (!key) {
