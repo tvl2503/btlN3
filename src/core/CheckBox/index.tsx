@@ -11,7 +11,10 @@ const CheckBox: FC<CheckBoxProps> = props => {
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
-    if (active && active !== isChecked) {
+    if (active === undefined || active === null) {
+      return;
+    }
+    if (active !== isChecked) {
       setIsChecked(active);
     }
   }, [active, isChecked]);

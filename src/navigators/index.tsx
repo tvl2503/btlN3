@@ -10,7 +10,10 @@ import Modal from '../core/Modal';
 import Button from '../core/Button';
 import { Modalize } from 'react-native-modalize';
 import Card from '../core/Card';
+import Tree from '../core/Tree';
+import TreeItem from '../core/Tree/TreeItem';
 import useQuery from '../hook/useQuery';
+
 const Stack = createNativeStackNavigator();
 
 const Home = ({navigation}) => {
@@ -39,12 +42,18 @@ const Another = () => {
         </Modal>
       </Portal>
       <Button onPress={() => ref.current?.open()}>Hello</Button>
-      <Card>
-        <Text>Test</Text>
-      </Card>
+      <Tree multiple>
+        <TreeItem eventKey='Key'>
+          Hello
+        </TreeItem>
+        <TreeItem eventKey='Key2'>
+          Hello2
+        </TreeItem>
+      </Tree>
     </View>
-  )
-}
+  );
+};
+
 export const navigationRef: React.RefObject<NavigationContainerRef<any>> =
   React.createRef();
 
