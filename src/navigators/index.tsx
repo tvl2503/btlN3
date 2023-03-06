@@ -16,6 +16,7 @@ import useQuery from '../hook/useQuery';
 import Test from './View';
 import useDispatchAction from '../hook/useDispatchAction';
 import { ACTION_TYPE } from '../constants/actions';
+import AuthStack from './AuthStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -68,10 +69,11 @@ export const navigationRef: React.RefObject<NavigationContainerRef<any>> =
 const AppNavigator = () => {
   return (
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator initialRouteName="test">
-        <Stack.Screen name="test" component={Home} />
-        <Stack.Screen name="abc" component={Another} />
-      </Stack.Navigator>
+      {/* <Stack.Navigator initialRouteName='test'>
+        <Stack.Screen name='test' component={Home}/>
+        <Stack.Screen name='abc' component={Another}/>
+      </Stack.Navigator> */}
+      <AuthStack />
     </NavigationContainer>
   );
 };
