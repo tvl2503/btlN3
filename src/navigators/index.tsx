@@ -3,7 +3,7 @@ import {
   NavigationContainer,
   NavigationContainerRef,
 } from '@react-navigation/native';
-import { Text, View , Pressable} from 'react-native';
+import { Text, View, Pressable } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Portal from '../core/Portal';
 import Modal from '../core/Modal';
@@ -13,25 +13,37 @@ import Card from '../core/Card';
 import Tree from '../core/Tree';
 import TreeItem from '../core/Tree/TreeItem';
 import useQuery from '../hook/useQuery';
+import Test from './View';
+import useDispatchAction from '../hook/useDispatchAction';
+import { ACTION_TYPE } from '../constants/actions';
 
 const Stack = createNativeStackNavigator();
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
   const { data } = useQuery({
     url: 'https://jsonplaceholder.typicode.com/posts',
   });
+  const dispatchAction = useDispatchAction();
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Pressable onPress={() => navigation.navigate('abc')}>
-      <Text>Home Screen</Text>
+      <Pressable
+        onPress={() =>
+          dispatchAction(ACTION_TYPE.TEST, {
+            a: 1,
+            b: 2,
+            c: 3,
+          })
+        }>
+        <Text>Home Screen</Text>
       </Pressable>
+      <Test />
     </View>
-  )
+  );
 };
 
 const Another = () => {
   const ref = useRef<Modalize>(null);
-   const { data } = useQuery({
+  const { data } = useQuery({
     url: 'https://jsonplaceholder.typicode.com/posts',
   });
   return (
@@ -43,12 +55,8 @@ const Another = () => {
       </Portal>
       <Button onPress={() => ref.current?.open()}>Hello</Button>
       <Tree multiple>
-        <TreeItem eventKey='Key'>
-          Hello
-        </TreeItem>
-        <TreeItem eventKey='Key2'>
-          Hello2
-        </TreeItem>
+        <TreeItem eventKey="Key">Hello</TreeItem>
+        <TreeItem eventKey="Key2">Hello2</TreeItem>
       </Tree>
     </View>
   );
@@ -60,9 +68,9 @@ export const navigationRef: React.RefObject<NavigationContainerRef<any>> =
 const AppNavigator = () => {
   return (
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator initialRouteName='test'>
-        <Stack.Screen name='test' component={Home}/>
-        <Stack.Screen name='abc' component={Another}/>
+      <Stack.Navigator initialRouteName="test">
+        <Stack.Screen name="test" component={Home} />
+        <Stack.Screen name="abc" component={Another} />
       </Stack.Navigator>
     </NavigationContainer>
   );
