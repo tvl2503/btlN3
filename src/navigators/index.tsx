@@ -13,6 +13,7 @@ import Card from '../core/Card';
 import Tree from '../core/Tree';
 import TreeItem from '../core/Tree/TreeItem';
 import useQuery from '../hook/useQuery';
+import AuthStack from './AuthStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -60,10 +61,11 @@ export const navigationRef: React.RefObject<NavigationContainerRef<any>> =
 const AppNavigator = () => {
   return (
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator initialRouteName='test'>
+      {/* <Stack.Navigator initialRouteName='test'>
         <Stack.Screen name='test' component={Home}/>
         <Stack.Screen name='abc' component={Another}/>
-      </Stack.Navigator>
+      </Stack.Navigator> */}
+      <AuthStack />
     </NavigationContainer>
   );
 };
