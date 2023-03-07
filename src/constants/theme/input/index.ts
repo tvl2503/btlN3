@@ -16,3 +16,9 @@ export enum INPUT_VARIANT {
 }
 
 export const INPUT_RADIUS = '4px';
+
+export const ICON_POSITION = {
+  sm: '8px',
+  md: '12px',
+  lg: '12px'
+}

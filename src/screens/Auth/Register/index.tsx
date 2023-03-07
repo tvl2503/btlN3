@@ -1,11 +1,24 @@
-import React from "react";
-import SafeArea from "../../../components/SafeArea";
-import { Text } from 'react-native';
+import React from 'react';
+import Container from '../../../core/Container';
+import SafeArea from '../../../core/SafeArea';
+import Header from '../ui/Header';
+import { Wrapper } from './index.style';
+import FormRegister from './ui/FormRegister';
 
-const RegisterScreen : React.FC = () => {
-    
-    return(<SafeArea>
-        <Text>Register</Text>
-    </SafeArea>)
-}
-export default RegisterScreen
+const RegisterScreen: React.FC = () => {
+  return (
+    <Wrapper>
+      <SafeArea>
+        <Container>
+          <Header
+            title="Đăng ký"
+            description="Bạn đã có tài khoản?"
+            action="Đăng nhập"
+          />
+          <FormRegister />
+        </Container>
+      </SafeArea>
+    </Wrapper>
+  );
+};
+export default RegisterScreen;

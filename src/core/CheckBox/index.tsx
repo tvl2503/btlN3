@@ -39,7 +39,7 @@ const CheckBox: FC<CheckBoxProps> = props => {
 
 CheckBox.defaultProps = {
   size: CHECKBOX_SIZE.md,
-  active: false,
+  active: undefined,
   variant: CHECKBOX_VARIANT.PRIMARY,
 };
 

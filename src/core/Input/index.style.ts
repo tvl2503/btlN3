@@ -1,8 +1,9 @@
 import { omit } from 'lodash';
-import { TextInput } from 'react-native';
+import { TextInput, TouchableOpacity, View } from 'react-native';
 import { ThemedStyledProps } from 'styled-components';
 import styled from 'styled-components/native';
 import {
+  ICON_POSITION,
   INPUT_PADDING,
   INPUT_RADIUS,
   INPUT_SIZE,
@@ -23,6 +24,17 @@ const getSelectionColor = (props: ThemedStyledProps<InputProps, ThemeCore>) => {
   return theme.colors.neutral_2;
 };
 
+export const InputWrapper = styled(View)`
+  position: relative;
+`;
+
+export const IconWrapper = styled(TouchableOpacity)<{size?: INPUT_SIZE}>`
+  position: absolute;
+  right: ${props => props.theme.space[3]};
+  top: ${props => ICON_POSITION[props?.size || INPUT_SIZE.md]};
+`;
+
+
 export const InputComposed = styled(TextInput).attrs<InputProps>(props => ({
   selectionColor: getSelectionColor(props),
   placeholderTextColor: props.error ? props.theme.colors.danger : props.theme.colors.gray_6,
@@ -36,5 +48,6 @@ export const InputComposed = styled(TextInput).attrs<InputProps>(props => ({
   ${({variant, theme}) => variant === INPUT_VARIANT.FILL && `background-color: ${theme.colors.textfield}`};
   ${({theme, error}) => error && `border-color: ${theme.colors.danger}`};
   color: ${props => props.theme.colors.neutral_2};
+  ${({icon, theme}) => icon && `padding-right: ${theme.space[9]}`}
   ${omit(TypographyConfig[TYPOGRAPHY_VARIANT.BODY], 'lineHeight')}
 `;
