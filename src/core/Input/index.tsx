@@ -3,9 +3,7 @@ import isFunction from 'lodash/isFunction';
 import PropTypes from 'prop-types';
 import {
   GestureResponderEvent,
-  NativeSyntheticEvent,
   TextInput,
-  TextInputFocusEventData,
 } from 'react-native/types';
 import { INPUT_SIZE, INPUT_VARIANT } from '../../constants/theme/input';
 import { IconWrapper, InputComposed, InputWrapper } from './index.style';
@@ -13,8 +11,7 @@ import { InputProps } from './index.types';
 import { isEqual } from 'lodash';
 
 const Input = forwardRef<TextInput, InputProps>((props, ref) => {
-  const { onFocus, onBlur, size, icon, onPressIcon, onChangeText, value: valueProps, ...restProps } = props;
-  const [focused, setFocused] = useState(false);
+  const { size, icon, onPressIcon, onChangeText, value: valueProps, style, ...restProps } = props;
   const [value, setValue] = useState('');
 
   useEffect(() => {
@@ -26,24 +23,6 @@ const Input = forwardRef<TextInput, InputProps>((props, ref) => {
       setValue(valueProps!);
     }
   }, [valueProps, value]);
-
-  const onFocusInput = (
-    event: NativeSyntheticEvent<TextInputFocusEventData>,
-  ) => {
-    if (isFunction(onFocus)) {
-      onFocus(event);
-    }
-    setFocused(true);
-  };
-
-  const onBlurInput = (
-    event: NativeSyntheticEvent<TextInputFocusEventData>,
-  ) => {
-    if (isFunction(onBlur)) {
-      onBlur(event);
-    }
-    setFocused(false);
-  };
 
   const onHandleIcon = (event: GestureResponderEvent) => {
     if (isFunction(onPressIcon)) {
@@ -58,11 +37,8 @@ const Input = forwardRef<TextInput, InputProps>((props, ref) => {
     }
   };
   return (
-    <InputWrapper>
+    <InputWrapper {...restProps} style={style}>
       <InputComposed
-        isActive={focused}
-        onBlur={onBlurInput}
-        onFocus={onFocusInput}
         ref={ref}
         size={size}
         onChangeText={onChange}
@@ -83,13 +59,11 @@ Input.displayName = 'Input';
 Input.defaultProps = {
   variant: INPUT_VARIANT.STROKE,
   size: INPUT_SIZE.md,
-  isActive: false,
 };
 
 Input.propTypes = {
   variant: PropTypes.oneOf(Object.values(INPUT_VARIANT)),
   size: PropTypes.oneOf(Object.values(INPUT_SIZE)),
-  isActive: PropTypes.bool,
 };
 
 export default Input;
