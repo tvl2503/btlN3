@@ -33,5 +33,6 @@ export const InputComposed = styled(TextInput).attrs<InputProps>(props => ({
 }))<InputProps>`
   color: ${props => props.theme.colors.neutral_2};
   flex: 1;
+  padding: 0;
   ${omit(TypographyConfig[TYPOGRAPHY_VARIANT.BODY], 'lineHeight')}
 `;

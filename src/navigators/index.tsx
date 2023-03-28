@@ -17,51 +17,9 @@ import Test from './View';
 import useDispatchAction from '../hook/useDispatchAction';
 import { ACTION_TYPE } from '../constants/actions';
 import AuthStack from './AuthStack';
+import AppStack from './AppStack';
 
-const Stack = createNativeStackNavigator();
-
-const Home = ({ navigation }) => {
-  const { data } = useQuery({
-    url: 'https://jsonplaceholder.typicode.com/posts',
-  });
-  const dispatchAction = useDispatchAction();
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Pressable
-        onPress={() =>
-          dispatchAction(ACTION_TYPE.TEST, {
-            a: 1,
-            b: 2,
-            c: 3,
-          })
-        }>
-        <Text>Home Screen</Text>
-      </Pressable>
-      <Test />
-    </View>
-  );
-};
-
-const Another = () => {
-  const ref = useRef<Modalize>(null);
-  const { data } = useQuery({
-    url: 'https://jsonplaceholder.typicode.com/posts',
-  });
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Portal>
-        <Modal ref={ref}>
-          <Text>Test Modal</Text>
-        </Modal>
-      </Portal>
-      <Button onPress={() => ref.current?.open()}>Hello</Button>
-      <Tree multiple>
-        <TreeItem eventKey="Key">Hello</TreeItem>
-        <TreeItem eventKey="Key2">Hello2</TreeItem>
-      </Tree>
-    </View>
-  );
-};
+// const Stack = createNativeStackNavigator();
 
 export const navigationRef: React.RefObject<NavigationContainerRef<any>> =
   React.createRef();
@@ -69,11 +27,8 @@ export const navigationRef: React.RefObject<NavigationContainerRef<any>> =
 const AppNavigator = () => {
   return (
     <NavigationContainer ref={navigationRef}>
-      {/* <Stack.Navigator initialRouteName='test'>
-        <Stack.Screen name='test' component={Home}/>
-        <Stack.Screen name='abc' component={Another}/>
-      </Stack.Navigator> */}
-      <AuthStack />
+      {/* <AuthStack /> */}
+      <AppStack />
     </NavigationContainer>
   );
 };

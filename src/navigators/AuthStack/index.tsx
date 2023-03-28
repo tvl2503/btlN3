@@ -16,12 +16,12 @@ const AuthStack = () => {
   const navigation = useNavigation();
   return (
     <Stack.Navigator
-      initialRouteName={NAVIGATION.register}
+      initialRouteName={NAVIGATION.LOGIN}
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name={NAVIGATION.login} component={LoginScreen} />
-      <Stack.Screen name={NAVIGATION.register} component={RegisterScreen} />
+      <Stack.Screen name={NAVIGATION.LOGIN} component={LoginScreen} />
+      <Stack.Screen name={NAVIGATION.REGISTER} component={RegisterScreen} />
     </Stack.Navigator>
   );
 };

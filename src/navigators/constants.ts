@@ -1,4 +1,9 @@
 export const NAVIGATION = {
-    login: 'Login Screen',
-    register: 'Register Screen'
+    LOGIN: 'LoginScreen',
+    REGISTER: 'RegisterScreen',
+    HOME: 'HomeScreen',
+    CATEGORY: 'CategoryScreen',
+    CART: 'CartScreen',
+    NEWS: 'NewsScreen',
+    PROFILE: 'ProfileScreen'
 }

@@ -4,4 +4,7 @@ export enum IONICONS_NAME {
   CHEVRON_BACK = 'chevron-back-outline',
   EYE = 'eye',
   EYE_OFF = 'eye-off',
+  STAR = 'star',
+  CLOCK = 'clock',
+  DOTS_HORIZONTAL = 'dots-horizontal'
 }
