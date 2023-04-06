@@ -14,4 +14,5 @@ export interface ButtonProps extends TouchableOpacityProps, AliasComponent {
   variant?: BUTTON_VARIANT;
   fullWidth?: boolean;
   color?: BUTTON_VARIANT;
+  loading?: boolean;
 }

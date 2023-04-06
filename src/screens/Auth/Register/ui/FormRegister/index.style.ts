@@ -2,6 +2,7 @@ import { View } from 'react-native';
 import styled from 'styled-components/native';
 import LoginSocialWrapper from '../../../../../components/shared/LoginSocialWrapper';
 import Button from '../../../../../core/Button';
+import Form from '../../../../../core/Form';
 import Input from '../../../../../core/Input';
 import Row from '../../../../../core/Row';
 import Typography from '../../../../../core/Typography';
@@ -12,7 +13,10 @@ export const FormRegisterContainer = styled(View)`
 
 export const InputComposed = styled(Input)`
   margin-bottom: ${props => props.theme.space[4]};
-  background: ${props => props.theme.colors.textfield};
+`;
+
+export const FormItemComposed = styled(Form.Input)`
+  margin-bottom: ${props => props.theme.space[4]};
 `;
 
 export const ButtonComposed = styled(Button)``;

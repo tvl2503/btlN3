@@ -7,6 +7,8 @@ export const request = axios.create({
   timeout: 10000,
 });
 
+console.log(Config.API_URL);
+
 const initInterceptor = () => {
   request.interceptors.request.use(async request => {
     try {
