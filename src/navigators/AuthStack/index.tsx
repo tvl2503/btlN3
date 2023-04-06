@@ -1,27 +1,20 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from '../../screens/Auth/Login';
-import RegisterScreen from '../../screens/Auth/Register';
 import { NAVIGATION } from '../constants';
-import Button from '../../core/Button';
-import Icons from '../../core/Icons';
-import { BUTTON_VARIANT } from '../../constants/theme/button';
-import { COLORS } from '../../theme/colors';
-import { useNavigation } from '@react-navigation/native';
-import { IONICONS_NAME } from '../../constants/icons/ionicons';
+import { AUTHENTICATION_STACKS } from '../../constants/views/authentication';
 
 const Stack = createNativeStackNavigator();
 
 const AuthStack = () => {
-  const navigation = useNavigation();
   return (
     <Stack.Navigator
-      initialRouteName={NAVIGATION.register}
+      initialRouteName={NAVIGATION.LOGIN}
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name={NAVIGATION.login} component={LoginScreen} />
-      <Stack.Screen name={NAVIGATION.register} component={RegisterScreen} />
+      {AUTHENTICATION_STACKS.map(item => (
+        <Stack.Screen key={item?.name} {...item as any} />
+      ))}
     </Stack.Navigator>
   );
 };

@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { isFunction } from 'lodash';
+import { isFunction, isObject } from 'lodash';
 import React, { FC } from 'react';
 import { GestureResponderEvent, TouchableOpacity } from 'react-native';
 import { TypographyProps } from '../Typography/index.types';
@@ -17,7 +17,7 @@ const Link: FC<LinkProps> = props => {
     if (isFunction(onPress)) {
       onPress(event);
     }
-    if (screen) {
+    if (screen && isObject(navigation)) {
       // @ts-ignore
       navigation.navigate(screen, config);
     }

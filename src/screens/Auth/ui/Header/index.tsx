@@ -1,4 +1,5 @@
 import React, { FC, ReactNode } from 'react';
+import PropTypes from 'prop-types';
 import { LinkProps } from '../../../../core/Link';
 import { TYPOGRAPHY_VARIANT } from '../../../../constants/theme/typography';
 import {
@@ -18,10 +19,10 @@ interface HeaderProps extends ViewProps {
   description?: ReactNode;
   action?: ReactNode;
   configAction?: LinkProps;
-};
+}
 
 const Header: FC<HeaderProps> = props => {
-  const { title, description, action, ...rest } = props;
+  const { title, description, action, configAction, ...rest } = props;
   return (
     <Container {...rest}>
       <RowWrapper>
@@ -33,10 +34,22 @@ const Header: FC<HeaderProps> = props => {
         <Description variant={TYPOGRAPHY_VARIANT.CAPTION_14_REGULAR}>
           {description}
         </Description>
-        <LinkAction variant={TYPOGRAPHY_VARIANT.CAPTION_14_REGULAR}>{action}</LinkAction>
+        <LinkAction
+          variant={TYPOGRAPHY_VARIANT.CAPTION_14_REGULAR}
+          {...(configAction || {})}>
+          {action}
+        </LinkAction>
       </RowTitle>
     </Container>
   );
+};
+
+Header.defaultProps = {
+  configAction: {},
+};
+
+Header.propTypes = {
+  configAction: PropTypes.object,
 };
 
 export default Header;
