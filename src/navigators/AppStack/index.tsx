@@ -1,7 +1,5 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NAVIGATION } from '../constants';
 import { useNavigation } from '@react-navigation/native';
 import HomeScreen from '../../screens/HomeScreen';
 import CategoryScreen from '../../screens/CategoryScreen';
@@ -10,6 +8,7 @@ import NewsScreen from '../../screens/NewsScreen';
 import ProfileScreen from '../../screens/ProfileScreen';
 import Icons from '../../core/Icons';
 import { COLORS } from '../../theme/colors';
+import { NAVIGATION } from '../../constants/navigation';
 
 const Tab  = createBottomTabNavigator();
 

@@ -5,6 +5,7 @@ import Container from '../../../core/Container';
 import { COLORS } from '../../../theme/colors';
 import Header from '../ui/Header';
 import FormLogin from './ui/FormLogin';
+import { NAVIGATION } from '../../../constants/navigation';
 
 const LoginScreen: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const LoginScreen: React.FC = () => {
           title="Đăng nhập"
           description="Bạn chưa có tài khoản?"
           action="Đăng ký"
+          screen= {NAVIGATION.REGISTER}
           />
         <FormLogin />
       </Container>

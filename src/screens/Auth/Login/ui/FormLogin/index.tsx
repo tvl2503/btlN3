@@ -11,16 +11,24 @@ import LoginSocialWrapper from './../../../../../components/shared/LoginSocialWr
 interface FormLoginProps{
 
 }
+interface AccountState{
+    email : string;
+    password: string;
+}
 const FormLogin : React.FC<FormLoginProps> = (props) => {
     const [active, setActive] = useState(false);
-
+    const [account, setAccount] = useState<AccountState>({email: "", password: ""})
     const onPressIcon = () => {
       setActive(prevState => !prevState);
     };
+    const handleSubmit = () => {
+                
+    }
     return(
         <FormLoginContainer {...props}>
-            <InputComposed placeholder="Email" />
+            <InputComposed placeholder="Email" onChangeText={text => setAccount({...account, email : text})} />
             <InputComposed placeholder="Mật khẩu"
+                onChangeText={text => setAccount({...account, password : text})}
                 onPressIcon={onPressIcon}
                 icon={
                     <Icons.Ionicons
@@ -33,6 +41,7 @@ const FormLogin : React.FC<FormLoginProps> = (props) => {
             />
              <ButtonComposed
                 fullWidth
+                onPress={handleSubmit}
                 size={BUTTON_SIZE.lg}
                 variant={BUTTON_VARIANT.secondary}>
                 Đăng nhập
