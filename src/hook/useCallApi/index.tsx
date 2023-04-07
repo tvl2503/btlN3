@@ -17,7 +17,7 @@ const useCallApi = <T = any>(props: UseCallApiParams<T>) => {
     } catch (err) {
       const e = err as unknown as AxiosError;
       if (isFunction(error)) {
-        error(e?.message || e);
+        error(e?.response?.data || e?.response || e);
       }
     } finally {
       setIsLoading(false);

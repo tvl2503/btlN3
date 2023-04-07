@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import SafeArea from './../../core/SafeArea/index';
 import { BannerImage, 
@@ -13,7 +13,7 @@ import { BannerImage,
 import { TYPOGRAPHY_VARIANT } from '../../constants/theme/typography';
 import Typography from '../../core/Typography';
 import Link from '../../core/Link';
-import { NAVIGATION } from '../../navigators/constants';
+import { NAVIGATION } from '../../constants/navigation';
 import ProductCard from '../../components/shared/ProductCard';
 import { FlashList } from '@shopify/flash-list';
 interface Product {
@@ -61,13 +61,13 @@ const HomeScreen: React.FC = () => {
             <ContainerHomeScreen>
                 <BannerWrapper>
                     <BannerImage source={require('../../assets/BannerHome.png')} />
-                    <TextBanner variant= {TYPOGRAPHY_VARIANT.LABEL}>Chào buổi sáng, Hưng</TextBanner>
+                    <TextBanner variant= {TYPOGRAPHY_VARIANT.LABEL}>Chào buổi sáng, Linh</TextBanner>
                     <InputSearch placeholder='Bạn muốn tìm gì?' />
                 </BannerWrapper>
                 <ProductNearYouWrapper>
                     <TitleProductNearYou>
                         <Typography variant={TYPOGRAPHY_VARIANT.TITLE_18_MEDIUM}>Sản phẩm tốt gần bạn</Typography>
-                        <Link screen = {NAVIGATION.home}>Tất cả</Link>
+                        <Link screen = {NAVIGATION.HOME}>Tất cả</Link>
                     </TitleProductNearYou>
                     <FlashList 
                         data = {fakeData}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NAVIGATION } from '../constants';
+import { NAVIGATION } from '../../constants/navigation';
 import HomeScreen from '../../screens/HomeScreen';
 import CategoryScreen from '../../screens/CategoryScreen';
 import CartScreen from '../../screens/CartScreen';

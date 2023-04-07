@@ -8,7 +8,7 @@ export enum COLORS {
   neutral_1 = '#100E0D',
   neutral_2 = '#343231',
   neutral_3 = '#636261',
-  neutral_4 = '#939292',
+  neutral_4 = '#8C8C8C',
   neutral_5 = '#C3C2C2',
   neutral_6 = '#DBDBDB',
   gray_6 = '#BFBFBF',

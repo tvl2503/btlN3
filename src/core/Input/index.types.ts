@@ -9,6 +9,5 @@ export interface InputProps extends TextInputProps {
   error?: boolean;
   icon?: ReactNode;
   onPressIcon?: (event: GestureResponderEvent) => any;
-  rules?: Array<Rule>;
-  getError?: (err: string | null) => void;
+  errorMessage?: string;
 }

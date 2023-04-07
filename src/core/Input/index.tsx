@@ -16,7 +16,6 @@ import {
 } from './index.style';
 import { InputProps } from './index.types';
 import { isEqual } from 'lodash';
-import useCheckRules from './hook/useCheckRules';
 import { TYPOGRAPHY_VARIANT } from '../../constants/theme/typography';
 
 const Input = forwardRef<TextInput, InputProps>(
@@ -28,24 +27,12 @@ const Input = forwardRef<TextInput, InputProps>(
       onChangeText,
       value: valueProps,
       style,
-      rules,
       placeholder,
-      getError,
+      error,
+      errorMessage,
       ...restProps
     } = props;
     const [value, setValue] = useState<string | null>(null);
-    const message = useCheckRules({
-      field: placeholder,
-      rules: rules,
-      value,
-    });
-
-    useEffect(() => {
-      if (isFunction(getError)) {
-        getError(message);
-      }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [message]);
 
     useEffect(() => {
       const valuePProps = valueProps ?? -1;
@@ -71,14 +58,14 @@ const Input = forwardRef<TextInput, InputProps>(
     };
     return (
       <InputContainer style={style}>
-        <InputWrapper {...restProps} error={!!message}>
+        <InputWrapper {...restProps} error={!!errorMessage || error}>
           <InputComposed
             ref={ref}
             size={size}
             onChangeText={onChange}
             icon={icon}
             placeholder={placeholder}
-            error={!!message}
+            error={!!errorMessage || error}
             {...restProps}
           />
           {icon && (
@@ -87,9 +74,9 @@ const Input = forwardRef<TextInput, InputProps>(
             </IconWrapper>
           )}
         </InputWrapper>
-        {message && (
+        {errorMessage && (
           <ErrorMessage variant={TYPOGRAPHY_VARIANT.CAPTION_14_REGULAR}>
-            {message}
+            {errorMessage}
           </ErrorMessage>
         )}
       </InputContainer>

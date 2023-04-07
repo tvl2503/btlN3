@@ -1,11 +1,9 @@
 import React from 'react';
 import SafeArea from '../../../core/SafeArea';
 import Container from '../../../core/Container';
-import { COLORS } from '../../../theme/colors';
 import Header from '../ui/Header';
 import FormLogin from './ui/FormLogin';
-import { StatusBar } from 'react-native';
-import { NAVIGATION } from '../../../navigators/constants';
+import { NAVIGATION } from '../../../constants/navigation';
 
 const LoginScreen: React.FC = () => {
   return (
@@ -16,10 +14,8 @@ const LoginScreen: React.FC = () => {
           title="Đăng nhập"
           description="Bạn chưa có tài khoản?"
           action="Đăng ký"
-          configAction={{
-            screen: NAVIGATION.REGISTER
-          }}
-          />
+          screen={NAVIGATION.REGISTER}
+        />
         <FormLogin />
       </Container>
     </SafeArea>

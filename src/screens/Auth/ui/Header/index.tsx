@@ -13,16 +13,18 @@ import {
   Title,
 } from './index.style';
 import { ViewProps } from 'react-native/types';
+import { NAVIGATION } from '../../../../constants/navigation';
 
 interface HeaderProps extends ViewProps {
   title?: ReactNode;
   description?: ReactNode;
   action?: ReactNode;
   configAction?: LinkProps;
-}
+  screen?: NAVIGATION;
+};
 
 const Header: FC<HeaderProps> = props => {
-  const { title, description, action, configAction, ...rest } = props;
+  const { title, description, action, screen ,...rest } = props;
   return (
     <Container {...rest}>
       <RowWrapper>
@@ -34,11 +36,7 @@ const Header: FC<HeaderProps> = props => {
         <Description variant={TYPOGRAPHY_VARIANT.CAPTION_14_REGULAR}>
           {description}
         </Description>
-        <LinkAction
-          variant={TYPOGRAPHY_VARIANT.CAPTION_14_REGULAR}
-          {...(configAction || {})}>
-          {action}
-        </LinkAction>
+        <LinkAction variant={TYPOGRAPHY_VARIANT.CAPTION_14_REGULAR} screen={screen}>{action}</LinkAction>
       </RowTitle>
     </Container>
   );

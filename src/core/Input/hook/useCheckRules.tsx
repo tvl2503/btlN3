@@ -1,6 +1,5 @@
 import { isEmpty } from 'lodash';
-import { useState } from 'react';
-import useDidUpdate from '../../../hook/useDidUpdate';
+import { useEffect, useState } from 'react';
 import { buildChainPromise } from '../../utils/buildChainPromise';
 import { Rule } from '../index.types';
 
@@ -12,7 +11,7 @@ interface UseCheckRulesParams {
 const useCheckRules = (props: UseCheckRulesParams) => {
   const { rules, field, value } = props;
   const [error, setError] = useState<string | null>(null);
-  useDidUpdate(() => {
+  useEffect(() => {
     const isUpdated = value ?? -1;
     if (!rules || isEmpty(rules) || isUpdated === -1) {
       setError(null);

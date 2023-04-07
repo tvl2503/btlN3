@@ -11,6 +11,7 @@ export const ProductCardWrapper = styled(View)`
 export const ImageProduct = styled(Image)`
     width: 163px;
     height: 163px;
+    borderRadius: 8px;
 `
 export const NameProduct = styled(Typography)`
     flexWrap: wrap;
