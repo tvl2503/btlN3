@@ -6,4 +6,4 @@ export interface AliasComponent<T = any> {
 
 export interface BuildKey {
   [key: string]: any;
-}
+};

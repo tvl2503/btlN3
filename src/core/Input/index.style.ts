@@ -8,13 +8,11 @@ import {
   INPUT_VARIANT,
 } from '../../constants/theme/input';
 import { TypographyConfig, TYPOGRAPHY_VARIANT } from '../../constants/theme/typography';
+import Typography from '../Typography';
 import { InputProps } from './index.types';
 
 export const InputWrapper = styled(View)<InputProps>`
-  padding: ${props => INPUT_PADDING[props.size || INPUT_SIZE.md]};
-  ${props =>
-    props.variant === INPUT_VARIANT.STROKE &&
-    `border: 1px solid ${props.theme.colors.neutral_6}`};
+  ${props => `border: 1px solid ${props.theme.colors.neutral_6}`};
   border-radius: ${INPUT_RADIUS};
   border-color: ${({theme}) => theme.colors.neutral_6};
   ${({variant, theme}) => variant === INPUT_VARIANT.FILL && `background-color: ${theme.colors.textfield}`};
@@ -24,7 +22,7 @@ export const InputWrapper = styled(View)<InputProps>`
 `;
 
 export const IconWrapper = styled(TouchableOpacity)<{size?: INPUT_SIZE}>`
-  margin-left: ${props => props.theme.space[2]};
+  margin-right: ${props => props.theme.space[2]};
 `;
 
 
@@ -33,6 +31,13 @@ export const InputComposed = styled(TextInput).attrs<InputProps>(props => ({
 }))<InputProps>`
   color: ${props => props.theme.colors.neutral_2};
   flex: 1;
-  padding: 0;
+  padding: ${props => INPUT_PADDING[props.size || INPUT_SIZE.md]};
   ${omit(TypographyConfig[TYPOGRAPHY_VARIANT.BODY], 'lineHeight')}
 `;
+
+export const ErrorMessage = styled(Typography)`
+  color: ${props => props.theme.colors.danger};
+  padding-top: ${props => props.theme.space[1]};
+`;
+
+export const InputContainer = styled(View)``;

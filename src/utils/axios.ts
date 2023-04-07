@@ -1,28 +1,32 @@
 import Config from 'react-native-config';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { TOKEN } from '../constants/user';
 
 export const request = axios.create({
-  baseURL: Config.API_URL,
+  baseURL: Config.API_URL || 'http://localhost:3000/api',
   timeout: 10000,
 });
 
 const initInterceptor = () => {
-  request.interceptors.request.use(async request => {
+  request.interceptors.request.use(async config => {
     try {
-      const token = await AsyncStorage.getItem('token');
+      const token = await AsyncStorage.getItem(TOKEN);
       if (!token) {
-        return request;
+        return config;
       }
-      request.headers['Authorization'] = 'Bearer ' + token;
-      return request;
+      config.headers['Authorization'] = 'Bearer ' + token;
+      return config;
     } catch (err) {
       return request;
     }
   });
   request.interceptors.response.use(response => {
     return response;
+  }, (error) => {
+    return Promise.reject(error);
   });
+  
 };
 
 export default initInterceptor;

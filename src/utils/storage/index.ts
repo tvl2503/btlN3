@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { isObject } from 'lodash';
 
 class Storage {
   static async get<T = any>(key: string) {
@@ -7,7 +8,11 @@ class Storage {
       if (!data) {
         throw new Error();
       }
-      return JSON.parse(data) as T;
+      try {
+        return JSON.parse(data) as T;
+      } catch (err) {
+        return data;
+      }
     } catch (err) {
       return null;
     }
@@ -15,7 +20,10 @@ class Storage {
 
   static async setItem(key: string, value: any) {
     try {
-      const json = JSON.stringify(value);
+      let json = value;
+      if (isObject(value)) {
+        json = JSON.stringify(value);
+      }
       await AsyncStorage.setItem(key, json);
     } catch (err) {
       console.log(err);
@@ -29,7 +37,6 @@ class Storage {
       console.log(err);
     }
   }
-  
 }
 
 export default Storage;

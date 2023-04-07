@@ -8,6 +8,7 @@ import {
   BUTTON_VARIANT,
 } from '../../constants/theme/button';
 import { ButtonProps, BUTTON_SIZE } from './index.types';
+import Spin from '../Spin';
 
 export const TouchableOpacityComposed = styled.TouchableOpacity<ButtonProps>`
   align-self: flex-start;
@@ -23,9 +24,17 @@ export const TouchableOpacityComposed = styled.TouchableOpacity<ButtonProps>`
   width: ${(BUTTON_ICON_SIZE as any)[size || BUTTON_SIZE.md]};
   height: ${(BUTTON_ICON_SIZE as any)[size || BUTTON_SIZE.md]};
   `}
+  opacity: ${props => props?.disabled ? 0.5 : 1};
 `;
 
 export const TextButtonComposed = styled(Text)<ButtonProps>`
   color: ${props => props?.variant !== BUTTON_VARIANT.text ? props.theme.colors.white : props.theme.colors.neutral_2}
   text-align: center;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const SpinComposed = styled(Spin).attrs(props => ({
+  color: props.theme.colors.white,
+}))`
 `;

@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import store, { persistor } from './src/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import ActionProvider from './src/helper/ActionProvider';
+import UserProvider from './src/helper/UserProvider';
 
 initInterceptor();
 function App(): JSX.Element {
@@ -19,9 +20,11 @@ function App(): JSX.Element {
           <ActionProvider>
             <QueryProvider>
               <ThemeProvider theme={theme}>
-                <PortalProvider>
-                  <AppNavigator />
-                </PortalProvider>
+                <UserProvider>
+                  <PortalProvider>
+                    <AppNavigator />
+                  </PortalProvider>
+                </UserProvider>
               </ThemeProvider>
             </QueryProvider>
           </ActionProvider>

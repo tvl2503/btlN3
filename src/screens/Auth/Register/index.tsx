@@ -4,7 +4,6 @@ import SafeArea from '../../../core/SafeArea';
 import Header from '../ui/Header';
 import { Wrapper } from './index.style';
 import FormRegister from './ui/FormRegister';
-import { TextInput } from 'react-native';
 import { NAVIGATION } from '../../../constants/navigation';
 
 const RegisterScreen: React.FC = () => {

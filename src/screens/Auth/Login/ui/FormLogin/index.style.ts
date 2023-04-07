@@ -1,17 +1,18 @@
-import styled from "styled-components";
+import styled from "styled-components/native";
 import { View } from 'react-native';
 import LoginSocialWrapper from './../../../../../components/shared/LoginSocialWrapper/index';
 import Row from './../../../../../core/Row/index';
 import Typography from './../../../../../core/Typography/index';
 import Button from './../../../../../core/Button/index';
-import Input from './../../../../../core/Input/index';
+import Form from "../../../../../core/Form";
+
+export const FormContainer = styled(Form)``;
 
 export const FormLoginContainer = styled(View)`
     flex : 1;
 `
-export const InputComposed = styled(Input)`
+export const InputComposed = styled(Form.Input)`
   margin-bottom: ${props => props.theme.space[4]};
-  background: ${props => props.theme.colors.textfield};
 `;
 
 export const ButtonComposed = styled(Button)``;

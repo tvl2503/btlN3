@@ -1,4 +1,5 @@
 import React, { FC, ReactNode } from 'react';
+import PropTypes from 'prop-types';
 import { LinkProps } from '../../../../core/Link';
 import { TYPOGRAPHY_VARIANT } from '../../../../constants/theme/typography';
 import {
@@ -39,6 +40,14 @@ const Header: FC<HeaderProps> = props => {
       </RowTitle>
     </Container>
   );
+};
+
+Header.defaultProps = {
+  configAction: {},
+};
+
+Header.propTypes = {
+  configAction: PropTypes.object,
 };
 
 export default Header;
