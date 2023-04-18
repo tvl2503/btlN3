@@ -7,11 +7,26 @@ import {
   LoginSocialContainer,
 } from './index.style';
 import { LoginSocialProps } from './index.types';
-
+import {LoginManager, AccessToken } from 'react-native-fbsdk-next';
 const LoginSocial: FC<LoginSocialProps> = props => {
+
+  const handleFacebookLogin = () => {
+    LoginManager.logInWithPermissions(['public_profile'])
+    .then((result) => {
+      if (result.isCancelled) {
+        console.log('Login cancelled')
+      } else {
+        AccessToken.getCurrentAccessToken().then(token => {
+          console.log('Login success with permissions: ' + token)
+        })
+      }
+    }, function (error) {
+      console.log('Login fail with error: ' + error)
+    })
+  }
   return (
     <LoginSocialContainer {...props}>
-      <Circle style={styles.item}>
+      <Circle onPress={handleFacebookLogin} style={styles.item}>
         <ImageFacebook source={require('../../../assets/facebook.png')} />
       </Circle>
       <Circle>

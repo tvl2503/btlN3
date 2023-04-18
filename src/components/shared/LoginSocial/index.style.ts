@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
 import Image from "../../../core/Image";
 import Row from "../../../core/Row";
@@ -8,7 +8,7 @@ export const LoginSocialContainer = styled(Row)`
   justify-content: center;
 `;
 
-export const Circle = styled(View)`
+export const Circle = styled(TouchableOpacity)`
   width: 44px;
   height: 44px;
   justify-content: center;

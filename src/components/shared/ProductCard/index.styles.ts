@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { View, Image } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import Typography from "../../../core/Typography";
 
 interface IconWrapperProp{
     marginLeft? : number
 }
-export const ProductCardWrapper = styled(View)`
+export const ProductCardWrapper = styled(TouchableOpacity)`
     width : 163px;
 `
 export const ImageProduct = styled(Image)`

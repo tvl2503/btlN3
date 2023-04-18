@@ -1,7 +1,7 @@
 export const fonts = {
-    body: "Oswald-Regular",
-    heading: "Lato-Regular",
-    monospace: "Oswald-Regular",
+    body: "Roboto-Regular",
+    heading: "Roboto-Regular",
+    monospace: "Roboto-Regular",
   };
   
   export const fontWeights = {

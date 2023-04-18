@@ -6,7 +6,7 @@ import isIOS from '../../utils/typeof/isIOS';
 
 const SafeAreaStyle = styled.SafeAreaView`
   flex: 1;
-  margin-top: ${!isIOS() ? `${StatusBar.currentHeight}px` : '0px'};
+  margin-top: 0;
 `;
 interface Props extends SafeAreaViewProps {
   children: JSX.Element;

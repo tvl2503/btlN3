@@ -15,5 +15,6 @@ export enum COLORS {
   textfield = '#F2F2F2',
   lightdark = '#F6F6F6',
   transparent = 'transparent',
-  borderPrimary = "#F5F5F5"
+  borderPrimary = "#F5F5F5",
+  borderSecondary = "#E8E8E8"
 };

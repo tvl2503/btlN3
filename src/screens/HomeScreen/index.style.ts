@@ -1,9 +1,11 @@
 import styled from "styled-components";
-import { View, Image, ScrollView } from 'react-native';
+import { View, Image, ScrollView, Dimensions } from 'react-native';
 import Input from "../../core/Input";
 import Typography from "../../core/Typography";
 import { FlashList } from "@shopify/flash-list";
 
+
+const width = Dimensions.get('window').width
 export const ContainerHomeScreen = styled(ScrollView)`
     flex : 1;
     backgroundColor : ${(props) => props.theme.colors.white}
@@ -28,6 +30,7 @@ export const InputSearch = styled(Input)`
     marginHorizontal: 16px;
     top: 112px;
     borderRadius: 8px;
+    width: ${width - 32}px;
 `
 export const ProductNearYouWrapper = styled(View)`
     marginTop: 44px;

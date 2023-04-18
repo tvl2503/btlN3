@@ -6,21 +6,31 @@ import { IONICONS_NAME } from "../../../constants/icons/ionicons";
 import { COLORS } from "../../../theme/colors";
 import Typography from "../../../core/Typography";
 import { truncate } from './../../../utils/string';
+import { useNavigation } from "@react-navigation/native";
+import { NAVIGATION } from "../../../constants/navigation";
+import { HomeAppScreenNavigationProp } from "../../../navigators/index.type";
+const imgDefault = require("../../../assets/default-image.jpg")
 interface Product{
    product : {
-    media_urls: string[],
+    _id: string,
+    media_urls: { src : string }[],
     name: string,
-    price: number,
+    price: {original_price : number},
     description?: string,
    };
 }
 
 const ProductCard = ({product} : Product) => {
+    const navigation = useNavigation<HomeAppScreenNavigationProp>();
+    const handleClick = () => {
+        navigation.navigate(NAVIGATION.PRODUCT, {id : product._id})
+    }
     
     return(
-        <ProductCardWrapper>
+        <ProductCardWrapper onPress={handleClick}>
             <ImageProduct 
-                source={{uri : product.media_urls[0]}}
+                // source={{uri : product.media_urls.length > 0 ? product.media_urls[0].src : imgDefault}}
+                source={product.media_urls.length > 0 ? { uri : product.media_urls[0].src} : imgDefault}
             />
             <NameProduct variant={TYPOGRAPHY_VARIANT.TITLE_15_MEDIUM}>{truncate(product.name, 30)}</NameProduct>
             <ViewExtra>
@@ -35,7 +45,7 @@ const ProductCard = ({product} : Product) => {
             </ViewExtra>
             <Line />
             <PriceWrapper>
-                <PriceText>{product.price} đ</PriceText>
+                <PriceText>{product.price.original_price} đ</PriceText>
                 <Icons.MaterialCommunityIcons name = {IONICONS_NAME.DOTS_HORIZONTAL} color={COLORS.neutral_4} size = {16} />
             </PriceWrapper>
         </ProductCardWrapper>

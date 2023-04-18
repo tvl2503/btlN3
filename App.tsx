@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from './src/theme';
 import AppNavigator from './src/navigators';
@@ -10,9 +10,14 @@ import store, { persistor } from './src/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import ActionProvider from './src/helper/ActionProvider';
 import UserProvider from './src/helper/UserProvider';
+import SplashScreen from "react-native-splash-screen";
 
 initInterceptor();
 function App(): JSX.Element {
+
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   return (
     <>
       <Provider store={store}>

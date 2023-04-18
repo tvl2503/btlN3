@@ -6,5 +6,8 @@ export enum IONICONS_NAME {
   EYE_OFF = 'eye-off',
   STAR = 'star',
   CLOCK = 'clock',
-  DOTS_HORIZONTAL = 'dots-horizontal'
+  DOTS_HORIZONTAL = 'dots-horizontal',
+  CLOSE = 'close',
+  CART_OUTLINE = 'cart-outline',
+  HEART_OUTLINE = 'heart-outline'
 }
