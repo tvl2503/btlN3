@@ -28,7 +28,7 @@ const useQuery = <T extends any>(params: UseQueryParams) => {
     try {
       setIsLoading(true);
       const response = await request({
-        baseURL: url,
+        url: url,
         method: 'GET',
         ...config,
       });
@@ -55,13 +55,14 @@ const useQuery = <T extends any>(params: UseQueryParams) => {
   useEffect(() => {
     callQuery();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [callQuery, ...deps]);
+  }, [...deps]);
 
   return {
     data,
     isLoading,
     error,
     fetch: callQuery,
+    setData,
   };
 };
 

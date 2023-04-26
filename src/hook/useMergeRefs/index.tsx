@@ -14,8 +14,10 @@ const useMergeRefs = <T extends any>(
           typeof callback,
       );
     }
-    // @ts-ignore
-    ref.current = refValue;
+    if (ref) {
+      // @ts-ignore
+      ref.current = refValue;
+    }
     callback(refValue);
   };
 

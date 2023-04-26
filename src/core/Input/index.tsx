@@ -30,6 +30,7 @@ const Input = forwardRef<TextInput, InputProps>(
       placeholder,
       error,
       errorMessage,
+      styleInput,
       ...restProps
     } = props;
     const [value, setValue] = useState<string | null>(null);
@@ -66,6 +67,8 @@ const Input = forwardRef<TextInput, InputProps>(
             icon={icon}
             placeholder={placeholder}
             error={!!errorMessage || error}
+            style={styleInput}
+            value={value || ''}
             {...restProps}
           />
           {icon && (
@@ -90,6 +93,7 @@ Input.defaultProps = {
   variant: INPUT_VARIANT.STROKE,
   size: INPUT_SIZE.md,
   autoCapitalize: 'none',
+  styleInput: {},
 };
 
 Input.propTypes = {

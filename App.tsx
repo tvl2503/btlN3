@@ -10,11 +10,11 @@ import store, { persistor } from './src/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import ActionProvider from './src/helper/ActionProvider';
 import UserProvider from './src/helper/UserProvider';
-import SplashScreen from "react-native-splash-screen";
+import SplashScreen from 'react-native-splash-screen';
+import CartProvider from './src/helper/CartProvider';
 
 initInterceptor();
 function App(): JSX.Element {
-
   useEffect(() => {
     SplashScreen.hide();
   }, []);
@@ -26,9 +26,11 @@ function App(): JSX.Element {
             <QueryProvider>
               <ThemeProvider theme={theme}>
                 <UserProvider>
-                  <PortalProvider>
-                    <AppNavigator />
-                  </PortalProvider>
+                  <CartProvider>
+                    <PortalProvider>
+                      <AppNavigator />
+                    </PortalProvider>
+                  </CartProvider>
                 </UserProvider>
               </ThemeProvider>
             </QueryProvider>

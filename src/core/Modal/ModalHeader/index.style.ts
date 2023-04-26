@@ -10,6 +10,7 @@ export const ModalHeaderComposedComponent = styled(View)<ModalHeaderProps>`
   padding: ${props => props.theme.sizes.xl};
   border-bottom-width: 1px;
   border-color: ${props => props.theme.colors.neutral_6};
+  margin-bottom: ${props => props.theme.sizes.xl};
 `;
 
 export const ModalHeaderContainer = styled(View)`

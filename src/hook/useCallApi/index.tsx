@@ -12,7 +12,9 @@ const useCallApi = <T = any>(props: UseCallApiParams<T>) => {
       const response = (await request(...params)) as AxiosResponse;
       const data = response?.data || response;
       if (isFunction(success)) {
-        success(data);
+        success(Object.assign(data, {
+          params,
+        }));
       }
     } catch (err) {
       const e = err as unknown as AxiosError;

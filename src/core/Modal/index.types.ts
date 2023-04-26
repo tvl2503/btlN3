@@ -4,5 +4,6 @@ export interface ModalProps extends ModalizeProps {
   visible?: boolean;
   onHide?: () => void;
   unmountOnExit?: boolean;
+  usePortal?: boolean;
 }
 

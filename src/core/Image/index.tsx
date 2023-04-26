@@ -40,4 +40,8 @@ const Image: FC<ImageProps> = props => {
   );
 };
 
+Image.defaultProps = {
+  resizeMode: 'cover',
+};
+
 export default Image;

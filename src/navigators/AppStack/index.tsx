@@ -3,7 +3,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NAVIGATION } from '../../constants/navigation';
 import HomeScreen from '../../screens/HomeScreen';
 import CategoryScreen from '../../screens/CategoryScreen';
-import CartScreen from '../../screens/CartScreen';
 import NewsScreen from '../../screens/NewsScreen';
 import ProfileScreen from '../../screens/ProfileScreen';
 import Icons from '../../core/Icons';
@@ -11,6 +10,7 @@ import { COLORS } from '../../theme/colors';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/types';
 import AuthStack from '../AuthStack';
+import CartStack from '../CartStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -82,7 +82,7 @@ const AppStack = () => {
       />
       <Tab.Screen
         name={NAVIGATION.CART}
-        component={CartScreen}
+        component={CartStack}
         options={{ title: 'Giỏ hàng' }}
       />
       <Tab.Screen

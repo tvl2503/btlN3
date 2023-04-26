@@ -18,7 +18,7 @@ const Button = forwardRef<TouchableOpacity, ButtonProps>((props, ref) => {
       size={size}
       {...restProps}>
       <TextButtonComposed variant={variant} as={as}>
-        {loading ? <SpinComposed size={20} type="Arc" /> : children}
+        {loading ? <SpinComposed size={16} type="Arc" /> : children}
       </TextButtonComposed>
     </TouchableOpacityComposed>
   );

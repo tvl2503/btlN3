@@ -2,6 +2,7 @@ import { omit } from 'lodash';
 import { TextInput, TouchableOpacity, View } from 'react-native';
 import styled from 'styled-components/native';
 import {
+  BACKGROUND_INPUT,
   INPUT_PADDING,
   INPUT_RADIUS,
   INPUT_SIZE,
@@ -15,7 +16,7 @@ export const InputWrapper = styled(View)<InputProps>`
   ${props => `border: 1px solid ${props.theme.colors.neutral_6}`};
   border-radius: ${INPUT_RADIUS};
   border-color: ${({theme}) => theme.colors.neutral_6};
-  ${({variant, theme}) => variant === INPUT_VARIANT.FILL && `background-color: ${theme.colors.textfield}`};
+  ${({variant}) => `background-color: ${BACKGROUND_INPUT[variant || INPUT_VARIANT.STROKE]}`};
   ${({theme, error}) => error && `border-color: ${theme.colors.danger}`};
   flex-direction: row;
   align-items: center;

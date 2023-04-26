@@ -7,8 +7,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NAVIGATION } from '../constants/navigation';
 import ProductScreen from '../screens/ProductScreen';
 import { RootStackParamList } from './index.type';
+import { ROOT_STACK_ELEMENTS } from '../constants/stack/root';
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+export const Stack = createNativeStackNavigator<RootStackParamList>();
 const AppNavigator = () => {
   return (
     <NavigationContainer>
@@ -16,8 +17,9 @@ const AppNavigator = () => {
       <Stack.Navigator 
         screenOptions={{headerShown: false}}
       >
-        <Stack.Screen name = {NAVIGATION.HOME_APP} component={AppStack} />
+        <Stack.Screen name = {NAVIGATION.HOME_APP} component={AppStack}/>
         <Stack.Screen name = {NAVIGATION.PRODUCT} component={ProductScreen} />
+        {ROOT_STACK_ELEMENTS.map(item => <Stack.Screen {...item} key={item.name}/>)}
       </Stack.Navigator>
     </NavigationContainer>
   );

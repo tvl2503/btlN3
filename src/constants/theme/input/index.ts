@@ -1,3 +1,5 @@
+import { COLORS } from "../../../theme/colors";
+
 export enum INPUT_SIZE {
   md = 'md',
   sm = 'sm',
@@ -13,6 +15,7 @@ export const INPUT_PADDING = {
 export enum INPUT_VARIANT {
   STROKE = 'stroke',
   FILL = 'fill',
+  FILL_WHITE = 'fill-white'
 }
 
 export const INPUT_RADIUS = '4px';
@@ -21,4 +24,10 @@ export const ICON_POSITION = {
   sm: '8px',
   md: '12px',
   lg: '12px'
+};
+
+export const BACKGROUND_INPUT = {
+  [INPUT_VARIANT.STROKE]: 'transparent',
+  [INPUT_VARIANT.FILL]: COLORS.textfield,
+  [INPUT_VARIANT.FILL_WHITE]: COLORS.white,
 }

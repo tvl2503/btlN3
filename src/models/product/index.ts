@@ -1,23 +1,26 @@
 import { Review } from "../review";
+import { Shop } from "../shop";
 
 export class Product {
-    private name: string;
-    private description?: string;
-    private quantity?: number;
-    private _id: string;
-    private like?: number;
-    private num_buy: number;
-    private num_reviews: number;
-    private price: {
+    public name: string;
+    public description?: string;
+    public quantity?: number;
+    public readonly _id: string;
+    public like?: number;
+    public num_buy: number;
+    public num_reviews: number;
+    public shop: string | Shop;
+    public price: {
         discount_price?: number;
         original_price: number
     };
-    private media_urls: {
+    public media_urls: {
         src : string;
         title?: string;
     }[];
   
     constructor(props: Product) {
+      const { shop } = props;
       this.name = props.name;
       this.description = props.description;
       this.quantity = props.quantity;
@@ -27,6 +30,7 @@ export class Product {
       this.num_reviews = props.num_reviews;
       this.price = props.price;
       this.media_urls = props.media_urls;
+      this.shop = shop;
     }
   
     public get getName(): string | undefined {
@@ -56,5 +60,7 @@ export class Product {
     public get getMediaUrls() : { src: string; title?: string}[]{
         return this.media_urls
     }
+    public get getState() {
+      return this;
+    }
   };
-  

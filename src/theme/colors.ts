@@ -16,5 +16,7 @@ export enum COLORS {
   lightdark = '#F6F6F6',
   transparent = 'transparent',
   borderPrimary = "#F5F5F5",
-  borderSecondary = "#E8E8E8"
+  borderSecondary = "#E8E8E8",
+  light_secondary = '#D9F5E2',
+  background = '#FAFAFA',
 };

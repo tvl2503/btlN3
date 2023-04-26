@@ -1,3 +1,3 @@
 export enum ACTION_TYPE {
-  TEST = 'test'
+  CREATE_ADDRESS = '[Address] Create Address',
 };

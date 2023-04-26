@@ -9,5 +9,6 @@ export enum IONICONS_NAME {
   DOTS_HORIZONTAL = 'dots-horizontal',
   CLOSE = 'close',
   CART_OUTLINE = 'cart-outline',
-  HEART_OUTLINE = 'heart-outline'
+  HEART_OUTLINE = 'heart-outline',
+  MAP_MARKER = 'map-marker-alt',
 }

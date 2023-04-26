@@ -18,8 +18,8 @@ const UserProvider: FC<PropsWithChildren> = (props) => {
     return getInfoUser();
   };
 
-  const onAutoLoginError = () => {
-
+  const onAutoLoginError = async () => {
+    await onLogout();
   };
 
   const onAutoLoginSuccess = async (data: BaseResponse<User>) => {

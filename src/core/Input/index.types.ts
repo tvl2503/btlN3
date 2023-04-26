@@ -1,4 +1,6 @@
 import { ReactNode } from 'react';
+import { TextStyle } from 'react-native';
+import { StyleProp } from 'react-native';
 import { GestureResponderEvent, TextInputProps } from 'react-native/types';
 import { INPUT_SIZE, INPUT_VARIANT } from '../../constants/theme/input';
 
@@ -10,4 +12,5 @@ export interface InputProps extends TextInputProps {
   icon?: ReactNode;
   onPressIcon?: (event: GestureResponderEvent) => any;
   errorMessage?: string;
+  styleInput?: StyleProp<TextStyle>;
 }

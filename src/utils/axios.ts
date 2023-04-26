@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TOKEN } from '../constants/user';
 
 export const request = axios.create({
-  baseURL: Config.API_URL || 'http://localhost:3000/api',
+  baseURL: 'http://localhost:3000/api',
   timeout: 10000,
 });
 
