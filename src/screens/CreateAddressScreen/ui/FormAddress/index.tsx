@@ -1,5 +1,5 @@
-import React, { FC, useState } from 'react';
-import { ViewProps } from 'react-native';
+import React, { FC, Fragment, useState } from 'react';
+import { StyleProp, View, ViewProps } from 'react-native';
 import required from '../../../../core/Input/rules/required';
 import { AliasComponent } from '../../../../types';
 import {
@@ -19,9 +19,11 @@ import useDispatchAction from '../../../../hook/useDispatchAction';
 import { ACTION_TYPE } from '../../../../constants/actions';
 import { Address } from '../../../../models/address';
 
-interface FormAddressProps extends AliasComponent<ViewProps> {}
+interface FormAddressProps extends AliasComponent<ViewProps> {
+  styleFooter?: StyleProp<View>;
+}
 const FormAddress: FC<FormAddressProps> = props => {
-  const { ...rest } = props;
+  const { as: Component = Fragment, styleFooter = {}, ...rest } = props;
   const [err, setErr] = useState<string | null>(null);
   const dispatch = useDispatchAction();
 
@@ -50,7 +52,7 @@ const FormAddress: FC<FormAddressProps> = props => {
     <FormComposed onSubmit={onSubmitForm}>
       {({ isValidForm, onSubmit }) => {
         return (
-          <>
+          <Component>
             {/* <ContainerComposed  {...rest}> */}
             <MainFormContainer {...rest}>
               <FormInput
@@ -86,7 +88,7 @@ const FormAddress: FC<FormAddressProps> = props => {
               />
             </MainFormContainer>
             {/* </ContainerComposed> */}
-            <FormAction>
+            <FormAction {...styleFooter}>
               <FormSubmitButton
                 loading={isLoading}
                 onPress={onSubmit}
@@ -97,11 +99,15 @@ const FormAddress: FC<FormAddressProps> = props => {
                 Giao đến địa chỉ này
               </FormSubmitButton>
             </FormAction>
-          </>
+          </Component>
         );
       }}
     </FormComposed>
   );
+};
+
+FormAddress.defaultProps = {
+  styleFooter: {},
 };
 
 export default FormAddress;

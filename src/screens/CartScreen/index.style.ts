@@ -1,5 +1,10 @@
 import { View } from 'react-native';
 import styled from 'styled-components/native';
+import { TYPOGRAPHY_VARIANT } from '../../constants/theme/typography';
+import Button from '../../core/Button';
+import Card from '../../core/Card';
+import Row from '../../core/Row';
+import Typography from '../../core/Typography';
 import Address from './ui/Address';
 import ListCartItem from './ui/ListCartItem';
 
@@ -25,3 +30,25 @@ export const ListCartItemComposed = styled(ListCartItem).attrs(_ => ({
     paddingBottom: 16,
   },
 }))``;
+
+
+export const WrapperButton = styled(Card)`
+  padding: ${props => props.theme.sizes.xl};
+`;
+
+export const WhiteTitle = styled(Typography).attrs(_ => ({
+  variant: TYPOGRAPHY_VARIANT.ACTION_14_MEDIUM
+}))`
+  color: ${props => props.theme.colors.white};
+  font-weight: 600;
+`;
+
+export const RowCenter = styled(Row)`
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`;
+
+export const ButtonContainer = styled(Button)`
+  
+`;

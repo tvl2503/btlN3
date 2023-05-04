@@ -1,9 +1,8 @@
 import React, { ElementType, FC } from 'react';
-import { FlatList, FlatListProps, ListRenderItem, Text } from 'react-native';
+import { FlatList, FlatListProps, ListRenderItem } from 'react-native';
 import { View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { TYPOGRAPHY_VARIANT } from '../../../../constants/theme/typography';
-import Typography from '../../../../core/Typography';
 import { CartItem } from '../../../../models/cart';
 import { RootState } from '../../../../store/types';
 import { CartItemComposed, CenterContainer, ContainerComposed, ImageEmpty, TitleEmpty, Wrapper } from './index.style';
@@ -36,8 +35,8 @@ const ListCartItem: FC<ListCartItemProps> = props => {
         <ImageEmpty source={require('../../../../assets/box-add.png')}/>
         <TitleEmpty variant={TYPOGRAPHY_VARIANT.CAPTION_14_REGULAR}>Giỏ hàng trống</TitleEmpty>
       </CenterContainer>
-    )
-  }
+    );
+  };
 
   return (
     <ContainerComposed as={Component}>

@@ -1,10 +1,13 @@
+import { RouteProp, useRoute } from '@react-navigation/native';
 import { isArray, isEmpty } from 'lodash';
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { ViewProps } from 'react-native';
 import { ACTION_TYPE } from '../../../../constants/actions';
+import { KEY_DEFAULT_ADDRESS } from '../../../../constants/address';
 import { PAGE } from '../../../../constants/apis';
 import { ADDRESS_API } from '../../../../constants/apis/address';
 import { IONICONS_NAME } from '../../../../constants/icons/ionicons';
+import { NAVIGATION } from '../../../../constants/navigation';
 import { TYPOGRAPHY_VARIANT } from '../../../../constants/theme/typography';
 import Row from '../../../../core/Row';
 import Spinner from '../../../../core/Spinner';
@@ -14,6 +17,7 @@ import useQuery from '../../../../hook/useQuery';
 import { Address as AddressModel } from '../../../../models/address';
 import { BasePaginationResponse } from '../../../../services/shared/types';
 import { AliasComponent } from '../../../../types';
+import Storage from '../../../../utils/storage';
 import ModalCreateAddress from '../ModalCreateAddress';
 import {
   AddressContainer,
@@ -26,6 +30,11 @@ import {
   TitleDetailAddress,
 } from './index.style';
 
+type Params = {
+  address: {
+    id?: string
+  }
+}
 interface AddressProps extends AliasComponent<ViewProps> {}
 
 interface AddressComposed extends AddressModel {
@@ -33,9 +42,11 @@ interface AddressComposed extends AddressModel {
 }
 const Address: FC<AddressProps> = props => {
   const { ...restProps } = props;
+  const { params } = useRoute<RouteProp<Params, 'address'>>();
+  const [idSelected, setIdSelected] = useState<string | null>(null);
   const [show, setShow] = useState(false);
   const { data: dataAction } = useListenerAction<AddressModel>({
-    key: ACTION_TYPE.CREATE_ADDRESS
+    key: ACTION_TYPE.CREATE_ADDRESS,
   });
 
   const { data, error, isLoading, setData } = useQuery<BasePaginationResponse<Array<AddressComposed>>>({
@@ -46,7 +57,7 @@ const Address: FC<AddressProps> = props => {
         [PAGE]: -1,
       },
     },
-    useCache: false,
+    // useCache: false,
   });
 
   const onHandle = () => {
@@ -70,17 +81,34 @@ const Address: FC<AddressProps> = props => {
     onHide();
   }, [dataAction, setData]);
 
+  useEffect(() => {
+    (async () => {
+      const payload = await Storage.get(KEY_DEFAULT_ADDRESS);
+      if (!payload) {
+        return;
+      }
+      setIdSelected(payload);
+    })();
+
+    if (params?.id) {
+      setIdSelected(params?.id);
+    }
+  }, [params]);
+
   const selectedAddress = useMemo(() => {
     const value = data?.data;
     if (isEmpty(value) || !isArray(value)) {
       return null;
     }
-    const addressSelected = value.find(item => item?.selected);
-    if (!addressSelected) {
+    if (!idSelected) {
       return value[0];
     }
-    return addressSelected;
-  }, [data]);
+    const payload = value?.find(item => item?._id === idSelected);
+    if (!payload) {
+      return value[0];
+    }
+    return payload;
+  }, [data, idSelected]);
 
   return (
     <>
@@ -103,7 +131,7 @@ const Address: FC<AddressProps> = props => {
                       variant={TYPOGRAPHY_VARIANT.CAPTION_14_REGULAR}>
                       {selectedAddress?.detail}, {selectedAddress?.district}, {selectedAddress?.ward}, {selectedAddress?.city}
                     </AddressDetail>
-                    <LinkText>Thay đổi</LinkText>
+                    <LinkText screen={NAVIGATION.LIST_ADDRESS}>Thay đổi</LinkText>
                   </>
                 ) : (
                   <>

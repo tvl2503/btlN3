@@ -18,5 +18,11 @@ export enum NAVIGATION {
   // CART
 
   CART_HOME = 'CartHomeScreen',
-  CREATE_ADDRESS = 'CreateAddressScreen'
+  CREATE_ADDRESS = 'CreateAddressScreen',
+  LIST_ADDRESS = 'ListAddressScreen',
+
+  // CHECKOUT
+
+  CHECKOUT_SCREEN = 'CheckoutScreen',
+  CHECKOUT_HOME = 'CheckoutHome'
 }

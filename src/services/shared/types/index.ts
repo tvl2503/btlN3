@@ -25,7 +25,7 @@ export interface Filter {
 
 export interface Sort {
   key: string;
-  value: 1 | -1;
+  operator: 1 | -1;
 }
 
 export interface BasePaginationRequest {
