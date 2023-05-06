@@ -1,5 +1,5 @@
 import { RouteProp, useRoute } from '@react-navigation/native';
-import { isArray, isEmpty } from 'lodash';
+import { isArray, isEmpty, isFunction } from 'lodash';
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { ViewProps } from 'react-native';
 import { ACTION_TYPE } from '../../../../constants/actions';
@@ -35,13 +35,15 @@ type Params = {
     id?: string
   }
 }
-interface AddressProps extends AliasComponent<ViewProps> {}
+interface AddressProps extends AliasComponent<ViewProps> {
+  onGetAddress?: (address: AddressModel) => void;
+}
 
 interface AddressComposed extends AddressModel {
   selected?: boolean;
 }
 const Address: FC<AddressProps> = props => {
-  const { ...restProps } = props;
+  const { onGetAddress ,...restProps } = props;
   const { params } = useRoute<RouteProp<Params, 'address'>>();
   const [idSelected, setIdSelected] = useState<string | null>(null);
   const [show, setShow] = useState(false);
@@ -109,6 +111,13 @@ const Address: FC<AddressProps> = props => {
     }
     return payload;
   }, [data, idSelected]);
+
+  useEffect(() => {
+    if (isFunction(onGetAddress)) {
+      onGetAddress(selectedAddress);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedAddress]);
 
   return (
     <>

@@ -11,4 +11,5 @@ export enum IONICONS_NAME {
   CART_OUTLINE = 'cart-outline',
   HEART_OUTLINE = 'heart-outline',
   MAP_MARKER = 'map-marker-alt',
+  PAYMENT = 'payment'
 }

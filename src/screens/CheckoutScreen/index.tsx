@@ -1,10 +1,24 @@
 import React from 'react';
-import { Text } from 'react-native';
+import Card from '../../core/Card';
+import {
+  AddressComposed,
+  CardCustom,
+  CheckoutContainer,
+  PaymentMethodComposed,
+  CardPaymnetComposed
+} from './index.style';
 
 const CheckoutScreen = () => {
   return (
-    <Text>Hello</Text>
-  )
+    <CheckoutContainer>
+      <CardCustom>
+        <AddressComposed />
+      </CardCustom>
+      <CardPaymnetComposed>
+        <PaymentMethodComposed />
+      </CardPaymnetComposed>
+    </CheckoutContainer>
+  );
 };
 
 export default CheckoutScreen;

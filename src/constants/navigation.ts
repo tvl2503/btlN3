@@ -24,5 +24,6 @@ export enum NAVIGATION {
   // CHECKOUT
 
   CHECKOUT_SCREEN = 'CheckoutScreen',
-  CHECKOUT_HOME = 'CheckoutHome'
+  CHECKOUT_HOME = 'CheckoutHome',
+  PAYMENT_METHOD= 'PaymentMethodScreen'
 }
