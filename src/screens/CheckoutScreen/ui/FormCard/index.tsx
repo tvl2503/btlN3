@@ -4,11 +4,15 @@ import Form from '../../../../core/Form';
 import Row from '../../../../core/Row';
 import { AliasComponent } from '../../../../types';
 import { FormInputContainer } from './index.style';
+import required from '../../../../core/Input/rules/required';
+import { PaymentMethodProps } from '../CartItemElement/index.types';
 
-interface FormCardProps extends AliasComponent {}
+interface FormCardProps extends AliasComponent {
+  data?: PaymentMethodProps
+}
 
 const FormCard: FC<FormCardProps> = props => {
-  const { as: Component = View, ...rest } = props;
+  const { as: Component = View, data, ...rest } = props;
   return (
     <Component {...rest}>
       <FormInputContainer>
@@ -16,6 +20,8 @@ const FormCard: FC<FormCardProps> = props => {
           placeholder="Số thẻ"
           keyboardType="number-pad"
           name="number"
+          rules={[required]}
+          defaultValue={data?.card?.number}
         />
       </FormInputContainer>
       <Row>
@@ -24,6 +30,8 @@ const FormCard: FC<FormCardProps> = props => {
             placeholder="Tháng"
             keyboardType="number-pad"
             name="exp_month"
+            rules={[required]}
+            defaultValue={data?.card?.exp_month}
           />
         </FormInputContainer>
         <FormInputContainer style={styles.space}>
@@ -31,11 +39,13 @@ const FormCard: FC<FormCardProps> = props => {
             placeholder="Năm"
             keyboardType="number-pad"
             name="exp_year"
+            rules={[required]}
+            defaultValue={data?.card?.exp_year}
           />
         </FormInputContainer>
       </Row>
       <FormInputContainer>
-        <Form.Input placeholder="Số CVC" keyboardType="number-pad" name="cvc" />
+        <Form.Input defaultValue={data?.card?.cvc} rules={[required]} placeholder="Số CVC" keyboardType="number-pad" name="cvc" />
       </FormInputContainer>
     </Component>
   );

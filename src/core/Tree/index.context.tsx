@@ -13,7 +13,7 @@ const TreeContext = createContext<TreeContextProps>({
 
 export const useTree = () => useContext(TreeContext);
 
-type OnCheckParams = Array<string> | string;
+type OnCheckParams = string | Array<string>;
 
 export interface TreeProviderProps extends PropsWithChildren {
   multiple?: boolean;

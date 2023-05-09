@@ -32,8 +32,8 @@ const CartItem: FC<CartItemProps> = (props) => {
   const title = product?.name;
   const shop = product?.shop;
   const productId = product?._id;
-  const originalPrice = product?.price?.original_price;
   const discountPrice = product?.price?.discount_price;
+  const originalPrice = product?.price?.original_price;
   const url = useMemo(() => {
     if (!mediaUrl || isEmpty(mediaUrl)) {
       return require('../../../../assets/default-image.jpg');
@@ -69,9 +69,9 @@ const CartItem: FC<CartItemProps> = (props) => {
           <TextDescription variant={TYPOGRAPHY_VARIANT.CAPTION_14_REGULAR}>
             Cung cấp bởi {isObject(shop) && shop?.name}
           </TextDescription>
-          {discountPrice && <TextOriginalPrice variant={TYPOGRAPHY_VARIANT.ACTION_14_MEDIUM}>{toCurrency(discountPrice)}</TextOriginalPrice>}
+          {discountPrice && <TextOriginalPrice variant={TYPOGRAPHY_VARIANT.ACTION_14_MEDIUM}>{toCurrency(originalPrice)}</TextOriginalPrice>}
           <TextPrice>
-            {toCurrency(originalPrice!)}
+            {toCurrency(discountPrice || originalPrice!)}
           </TextPrice>
           <QuantityButtonComposed product={product} quantity={quantity}/>
         </CartBoxContent>

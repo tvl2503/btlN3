@@ -13,6 +13,7 @@ import { useFormInstance } from '../FormInstance';
 interface FormItemProps extends InputProps {
   name: string;
   rules?: Array<Rule>;
+  defaultValue?: string;
 }
 const FormItem = forwardRef<TextInput, FormItemProps>((props, ref) => {
   const {
@@ -21,10 +22,11 @@ const FormItem = forwardRef<TextInput, FormItemProps>((props, ref) => {
     placeholder,
     rules,
     value: valueProps,
+    defaultValue,
     onEndEditing,
     ...rest
   } = props;
-  const [value, setValue] = useState<string | undefined>(valueProps || '');
+  const [value, setValue] = useState<string | undefined>(defaultValue || valueProps || '');
   const [isTouched, setIsTouched] = useState(false);
   const instance = useFormInstance();
   const message = useCheckRules({

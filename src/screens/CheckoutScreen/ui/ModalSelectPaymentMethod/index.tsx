@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { isFunction } from 'lodash';
 import { ModalProps } from '../../../../core/Modal/index.types';
 import Modal from '../../../../core/Modal';
 import Typography from '../../../../core/Typography';
@@ -11,15 +12,30 @@ import FormCard from '../FormCard';
 import Button from '../../../../core/Button';
 import { BUTTON_SIZE } from '../../../../core/Button/index.types';
 import { StyleSheet } from 'react-native';
+import { FormData } from '../../../../core/Form/FormInstance';
+import { PaymentMethodProps } from '../CartItemElement/index.types';
 
-interface ModalSelectPaymentMethodProps extends ModalProps {}
+interface ModalSelectPaymentMethodProps extends ModalProps {
+  onSubmitHandler?: (params: FormData) => void;
+  data?: PaymentMethodProps;
+}
 const ModalSelectPaymentMethod: FC<ModalSelectPaymentMethodProps> = props => {
-  const { ...rest } = props;
-  const [method, setMethod] = useState<string | null>(CASH);
+  const { onSubmitHandler, data, ...rest } = props;
+  const [method, setMethod] = useState<string | null>(data?.type || CASH);
 
-  const onCheck = (key: string) => {
-    setMethod(key);
-  }
+  const onCheck = (key: string | Array<string>) => {
+    setMethod(key as string);
+  };
+
+  const onSubmitForm = (params?: FormData) => {
+    if (isFunction(onSubmitHandler)) {
+      onSubmitHandler({
+        type: method,
+        card: params,
+      });
+    }
+  };
+
   return (
     <Modal {...rest}>
       <ModalHeaderComposed buttonClose={false}>
@@ -27,21 +43,41 @@ const ModalSelectPaymentMethod: FC<ModalSelectPaymentMethodProps> = props => {
           Chọn hình thức thanh toán
         </Typography>
       </ModalHeaderComposed>
-      <Tree value={method} onCheck={onCheck}>
+      <Tree value={method as any} onCheck={onCheck}>
         {PAYMENT_METHODS.map(item => (
           <Tree.Item key={item?.id} eventKey={item?.id}>
             {item?.title}
           </Tree.Item>
         ))}
       </Tree>
-      {method === CARD && <FormCardContainer>
-        <Form>
-          <FormCard />
-        </Form>
-      </FormCardContainer>}
-      <Modal.Footer style={[styles.footer]}>
-        <Button size={BUTTON_SIZE.lg} fullWidth>Xác nhận</Button>
-      </Modal.Footer>
+      {method === CARD ? (
+        <FormCardContainer>
+          <Form onSubmit={onSubmitForm}>
+            {({ onSubmit, isValidForm }) => {
+              return (
+                <>
+                  <FormCard data={data} />
+                  <Modal.Footer style={[styles.footer]}>
+                    <Button
+                      onPress={onSubmit}
+                      disabled={!isValidForm}
+                      size={BUTTON_SIZE.lg}
+                      fullWidth>
+                      Xác nhận
+                    </Button>
+                  </Modal.Footer>
+                </>
+              );
+            }}
+          </Form>
+        </FormCardContainer>
+      ) : (
+        <Modal.Footer style={[styles.footer]}>
+          <Button onPress={() => onSubmitForm(undefined)} size={BUTTON_SIZE.lg} fullWidth>
+            Xác nhận
+          </Button>
+        </Modal.Footer>
+      )}
     </Modal>
   );
 };
@@ -49,8 +85,8 @@ const ModalSelectPaymentMethod: FC<ModalSelectPaymentMethodProps> = props => {
 const styles = StyleSheet.create({
   footer: {
     paddingLeft: 0,
-    paddingRight: 0
-  }
-})
+    paddingRight: 0,
+  },
+});
 
 export default ModalSelectPaymentMethod;

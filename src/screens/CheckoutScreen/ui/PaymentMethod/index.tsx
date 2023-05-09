@@ -13,11 +13,15 @@ import {
   SubTitle,
   Title,
 } from './index.style';
+import { isFunction } from 'lodash';
 
-interface PaymentMethodProps extends AliasComponent {}
+interface PaymentMethodProps extends AliasComponent {
+  onSubmitForm?: (data: PaymentMethodProps) => void;
+  data?: PaymentMethodProps;
+}
 
 const PaymentMethod: FC<PaymentMethodProps> = props => {
-  const { ...rest } = props;
+  const { onSubmitForm, data, ...rest } = props;
   const [show, setShow] = useState(false);
   const onHandle = () => {
     setShow(true);
@@ -27,9 +31,20 @@ const PaymentMethod: FC<PaymentMethodProps> = props => {
     setShow(false);
   };
 
+  const onSubmit = (payload: PaymentMethodProps) => {
+    if (isFunction(onSubmitForm)) {
+      onSubmitForm(payload);
+    }
+  };
+
   return (
     <>
-      <ModalSelectPaymentMethod visible={show} onHide={onHide}/>
+      <ModalSelectPaymentMethod
+        onSubmitHandler={onSubmit}
+        visible={show}
+        onHide={onHide}
+        data={data}
+      />
       <PaymentMethodContainer {...rest}>
         <Row>
           <PaymentIconContainer>

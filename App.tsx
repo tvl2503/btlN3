@@ -12,6 +12,7 @@ import ActionProvider from './src/helper/ActionProvider';
 import UserProvider from './src/helper/UserProvider';
 import SplashScreen from 'react-native-splash-screen';
 import CartProvider from './src/helper/CartProvider';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 initInterceptor();
 function App(): JSX.Element {
@@ -28,7 +29,9 @@ function App(): JSX.Element {
                 <UserProvider>
                   <CartProvider>
                     <PortalProvider>
-                      <AppNavigator />
+                      <SafeAreaProvider>
+                        <AppNavigator />
+                      </SafeAreaProvider>
                     </PortalProvider>
                   </CartProvider>
                 </UserProvider>
