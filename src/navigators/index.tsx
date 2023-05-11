@@ -8,6 +8,7 @@ import { NAVIGATION } from '../constants/navigation';
 import ProductScreen from '../screens/ProductScreen';
 import { RootStackParamList } from './index.type';
 import { ROOT_STACK_ELEMENTS } from '../constants/stack/root';
+import SearchScreen from '../screens/SearchScreen';
 
 export const Stack = createNativeStackNavigator<RootStackParamList>();
 const AppNavigator = () => {
@@ -19,6 +20,7 @@ const AppNavigator = () => {
       >
         <Stack.Screen name = {NAVIGATION.HOME_APP} component={AppStack}/>
         <Stack.Screen name = {NAVIGATION.PRODUCT} component={ProductScreen} />
+        <Stack.Screen name = {NAVIGATION.SEARCH} component={SearchScreen} />
         {ROOT_STACK_ELEMENTS.map(item => <Stack.Screen {...item} key={item.name}/>)}
       </Stack.Navigator>
     </NavigationContainer>
