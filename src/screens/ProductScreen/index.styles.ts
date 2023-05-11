@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { Image, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Image, TouchableOpacity, View } from 'react-native';
 import Typography from "../../core/Typography";
 interface IconWrapperProp{
     marginLeft? : number
 }
+const width = Dimensions.get('window').width
 export const ProductScreenWrapper = styled(View)`
     flex: 1;
 `
@@ -55,4 +56,16 @@ export const PriceWrapper = styled(View)`
 `
 export const Price = styled(Typography)`
     color : ${props => props.theme.colors.danger}
+`
+export const FooterWrapper = styled(View)`
+    position: absolute;
+    bottom: 0;
+    align-items: center;
+    flexDirection: row;
+    justifyContent: center;
+    left: 0;
+    right: 0;
+    backgroundColor: ${props => props.theme.colors.white};
+    paddingTop: 8px;
+    paddingBottom: 30px;
 `

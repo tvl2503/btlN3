@@ -12,7 +12,7 @@ interface Props{
 const TabInfo : React.FC<Props> = ({product}) => {
 
   return (
-    <View style = {{flex : 1}}>
+    <View >
     <VoucherWrapper>
         <VoucherItem> 
             <VoucherSVG style = {{marginRight: 12}} />

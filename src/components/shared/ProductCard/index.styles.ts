@@ -18,6 +18,7 @@ export const NameProduct = styled(Typography)`
     fontSize: 14px;
     lineHeight: 22px;
     marginVertical: 8px;
+    height: 45px;
 `
 export const ViewExtra = styled(View)`
     flexDirection: row;

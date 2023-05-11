@@ -10,13 +10,14 @@ import { View } from 'react-native'
 import useCallApi from '../../hook/useCallApi'
 import { getAllProduct } from '../../services/product'
 import { ProductRequest } from '../../services/product/index.types'
+import { Product } from '../../models/product'
 
 interface Props{
     title: string;
     query : {[key : string] : any} | { [key : string] : { [key : string] : any }}
 }
 const ListProduct :React.FC<Props> = ({title, query}) => {
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState<Product[]>([]);
     const onGetProduct = (data: ProductRequest) => {
         return getAllProduct(data);
       };

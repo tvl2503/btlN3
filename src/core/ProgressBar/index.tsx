@@ -15,9 +15,9 @@ type Props = {
     percent: Percent,
     width? : number
 }
-const ProgressBar : React.FC<Props> = ({percent, width = 200}) => {
+const ProgressBar : React.FC<Props> = ({percent}) => {
   return (
-    <Progress.Bar progress={createPercent(percent)} borderWidth = {0} width={width} color={COLORS.warning} unfilledColor = {COLORS.gray_6} />
+    <Progress.Bar progress={createPercent(percent)} borderWidth = {0} color={COLORS.warning} unfilledColor = {COLORS.gray_6} />
   )
 }
 
