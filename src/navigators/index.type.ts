@@ -5,6 +5,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 export type RootStackParamList = {
   [NAVIGATION.HOME_APP]: undefined;
   [NAVIGATION.PRODUCT]: { id: string };
+  [NAVIGATION.SEARCH]: { keyword: string };
   [NAVIGATION.CREATE_ADDRESS]: undefined;
 };
 
@@ -15,6 +16,10 @@ export type HomeAppScreenNavigationProp = NativeStackNavigationProp<
 export type ProductScreenNavigationProp = StackScreenProps<
   RootStackParamList,
   NAVIGATION.PRODUCT
+>;
+export type SearchScreenNavigationProp = StackScreenProps<
+  RootStackParamList,
+  NAVIGATION.SEARCH
 >;
 export type CreateAddressNavigationProp = StackScreenProps<
   RootStackParamList,

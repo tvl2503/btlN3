@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Product } from '../../../models/product'
 import { ActivityIndicator, FlatList, View } from 'react-native'
-import { ListReivewWrapper, ListReivewHeader, RateNumeralLeft, RateNumeralRight, RateNumeralWrapper, RateStar, ListReivewDetail, ListReviewDetailHeader } from './index.styles'
+import { ListReivewWrapper, ListReivewHeader, RateNumeralLeft, RateNumeralRight, RateNumeralWrapper, RateStar, ListReivewDetail, ListReviewDetailHeader, LinkText } from './index.styles'
 import { getReviewById } from '../../../services/review'
 import useCallApi from '../../../hook/useCallApi'
 import Typography from '../../../core/Typography'
@@ -12,12 +12,21 @@ import { COLORS } from '../../../theme/colors'
 import { Review } from '../../../types/review'
 import { getDayMonth } from '../../../utils/date'
 import ListImageReview from '../../../components/ListImageReview'
+import AddReviewModal from '../AddReviewModal'
 
 interface Props{
     id : string
 }
 const TabRate : React.FC<Props> = ({id}) => {
     const [reviews, setReviews] = useState([]);
+    const [show, setShow] = useState(false);
+    const onHandle = () => {
+        setShow(true);
+      };
+    
+      const onHide = () => {
+        setShow(false);
+      };
     const onSuccess = (data : any) => {
         setReviews(data.data)
     }
@@ -35,8 +44,9 @@ const TabRate : React.FC<Props> = ({id}) => {
     useEffect(() => {
         send(id)
     }, [id])
-    
   return (
+    <>
+    <AddReviewModal adjustToContentHeight  = {false} visible = {show} onHide={onHide} />
     <View style = {{flex : 1}}>
         {
             isLoading &&
@@ -56,7 +66,7 @@ const TabRate : React.FC<Props> = ({id}) => {
         </RateNumeralWrapper>}
         <ListReivewWrapper>
             <ListReivewHeader>
-                <Typography style = {{color : COLORS.primary}}>Viết đánh giá</Typography>
+                <LinkText onPress={onHandle}>Viết đánh giá</LinkText>
             </ListReivewHeader>
             {
                 reviews.map((item : Review, index) => (
@@ -74,6 +84,7 @@ const TabRate : React.FC<Props> = ({id}) => {
             }
         </ListReivewWrapper>
     </View>
+    </>
     )
     }
 

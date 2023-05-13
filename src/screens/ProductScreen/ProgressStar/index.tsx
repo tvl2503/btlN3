@@ -21,7 +21,7 @@ const ProgressStar : React.FC<Reivews> = ({reviews}) => {
 
     const renderItem = (index :number, rating : Percent) => {
         return <ItemWrapper key = {index}>
-            <View>
+            <View style  = {{flex : 1, marginRight: 20}}>
                 <ProgressBar percent={rating} />
             </View>
             <Typography variant={TYPOGRAPHY_VARIANT.LABEL}>{5 - index} Sao </Typography>

@@ -11,7 +11,7 @@ export class Product {
     public num_reviews: number;
     public shop: string | Shop;
     public price: {
-        discount_price?: number;
+        discount_price: number;
         original_price: number
     };
     public media_urls: {

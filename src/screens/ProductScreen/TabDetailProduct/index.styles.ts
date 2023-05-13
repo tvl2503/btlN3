@@ -1,6 +1,7 @@
 import { View } from "react-native"
 import { Rating } from "react-native-ratings"
 import styled from "styled-components"
+import Link from "../../../core/Link"
 
 
 export const TabInfoWrapper = styled(View)`
@@ -40,6 +41,9 @@ export const ListReivewWrapper = styled(View)`
     borderColor: ${props => props.theme.colors.borderSecondary};
     flex: 1;
 `
+export const LinkText = styled(Link)`
+  padding-top: ${props => props.theme.sizes.sm};
+`;
 export const  ListReivewHeader = styled(View)`
     paddingVertical: 12px;
 `

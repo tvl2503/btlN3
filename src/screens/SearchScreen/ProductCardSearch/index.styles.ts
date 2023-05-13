@@ -1,12 +1,14 @@
+import { Image } from "react-native";
+import { View } from "react-native";
 import styled from "styled-components";
-import { View, Image, TouchableOpacity } from 'react-native';
 import Typography from "../../../core/Typography";
+import { TouchableOpacity } from "react-native";
 
-interface IconWrapperProp{
-    marginLeft? : number
-}
 export const ProductCardWrapper = styled(TouchableOpacity)`
-    width : 163px;
+    padding: 10px;
+    backgroundColor: ${props => props.theme.colors.white}; 
+    borderRadius: 8px;
+    width : 183px;
 `
 export const ImageProduct = styled(Image)`
     width: 163px;
@@ -19,15 +21,6 @@ export const NameProduct = styled(Typography)`
     lineHeight: 22px;
     marginVertical: 8px;
     height: 45px;
-`
-export const ViewExtra = styled(View)`
-    flexDirection: row;
-    marginBottom: 12px;
-`
-export const IconWrapper = styled(View)<IconWrapperProp>`
-    flexDirection: row;
-    alignItems: center;
-    marginLeft: ${(props) => props?.marginLeft || 0}px;
 `
 export const Line  = styled(View)`
     height: 1px;

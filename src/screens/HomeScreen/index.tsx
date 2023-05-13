@@ -9,17 +9,18 @@ import { BannerImage,
     TitleProductNearYou, 
     ContainerHomeScreen,
     BannerSale,
+    InputSearchWrapper,
+    ButtonSearch,
     } from './index.style';
 import { TYPOGRAPHY_VARIANT } from '../../constants/theme/typography';
-import Typography from '../../core/Typography';
-import Link from '../../core/Link';
 import { NAVIGATION } from '../../constants/navigation';
-import ProductCard from '../../components/shared/ProductCard';
-import { FlashList } from '@shopify/flash-list';
-import useCallApi from '../../hook/useCallApi';
 import { RootState } from '../../store/types';
 import { useSelector } from 'react-redux';
 import ListProduct from './ListProduct';
+import Icons from '../../core/Icons';
+import { IONICONS_NAME } from '../../constants/icons/ionicons';
+import { HomeAppScreenNavigationProp } from '../../navigators/index.type';
+import { useNavigation } from '@react-navigation/native';
 interface Product {
     media_urls: string[],
     name: string,
@@ -28,6 +29,13 @@ interface Product {
 }
 const HomeScreen: React.FC = () => {
     const user = useSelector<RootState>(state => state.user?.user);
+    const navigation = useNavigation<HomeAppScreenNavigationProp>();
+    const [keyword, setKeyword] = useState('');
+    const HandleSearch = () => {
+        if (keyword.length > 0) {
+                navigation.navigate(NAVIGATION.SEARCH, { keyword });
+        }
+    }
     return (
         <>
             
@@ -36,7 +44,12 @@ const HomeScreen: React.FC = () => {
                 <BannerWrapper>
                     <BannerImage source={require('../../assets/BannerHome.png')} />
                     <TextBanner variant= {TYPOGRAPHY_VARIANT.LABEL}>Chào buổi sáng, {user?.username}</TextBanner>
-                    <InputSearch placeholder='Bạn muốn tìm gì?' />
+                    <InputSearchWrapper>
+                        <ButtonSearch onPress={HandleSearch}>
+                            <Icons.Ionicons name={IONICONS_NAME.SEARCH_OUTLINE} size={28} />
+                        </ButtonSearch>
+                        <InputSearch onChangeText={text => setKeyword(text)} value={keyword} placeholder='Bạn muốn tìm gì?' />
+                    </InputSearchWrapper>
                 </BannerWrapper>
                 <ListProduct title='Được mua nhiều' query={{sort : { key : "num_buy", operator : -1 }}} />
                 <BannerSale 

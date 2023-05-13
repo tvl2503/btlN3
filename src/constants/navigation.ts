@@ -7,7 +7,7 @@ export enum NAVIGATION {
   // STACK APP
   HOME_APP = 'HomeAppScreen',
   PRODUCT = 'ProductScreen',
-
+  SEARCH = 'SearchScreen',
   // HOME APP
   HOME = 'HomeScreen',
   CATEGORY = 'CategoryScreen',

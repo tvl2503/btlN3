@@ -13,5 +13,6 @@ export enum IONICONS_NAME {
   MAP_MARKER = 'map-marker-alt',
   PAYMENT = 'payment',
   CHEVRON_RIGHT = 'md-chevron-forward-outline',
-  CREDIT_CARD = 'credit-card'
+  CREDIT_CARD = 'credit-card',
+  SEARCH_OUTLINE = 'search-outline'
 }

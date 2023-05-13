@@ -1,11 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { RouteProp } from '@react-navigation/native';
-import SafeArea from "../../core/SafeArea";
-import { HeaderLeft, HeaderWrapper, IconWrapper, IconWrapperHeader, ImageBanner, InfoProduct, Price, PriceWrapper, ProductScreenWrapper, TitleProduct, ViewExtra } from "./index.styles";
+import { FooterWrapper, HeaderLeft, HeaderWrapper, IconWrapper, IconWrapperHeader, ImageBanner, InfoProduct, Price, PriceWrapper, ProductScreenWrapper, TitleProduct, ViewExtra } from "./index.styles";
 import useCallApi from "../../hook/useCallApi";
 import { getProduct } from "../../services/product";
-import { Animated, FlatList, Platform, StatusBar, StyleSheet } from "react-native";
-import useImageAspectRatio from "../../hook/useImageAspectRatio";
+import { Animated, FlatList, Platform, ScrollView, StatusBar, StyleSheet } from "react-native";
 import { TYPOGRAPHY_VARIANT } from "../../constants/theme/typography";
 import Icons from "../../core/Icons";
 import { COLORS } from "../../theme/colors";
@@ -17,6 +14,10 @@ import { ProductScreenNavigationProp } from "../../navigators/index.type";
 import TabDetailProduct from "./TabDetailProduct";
 import { Product } from "../../models/product";
 import { FlashList } from "@shopify/flash-list";
+import Button from "../../core/Button";
+import { BUTTON_VARIANT } from "../../constants/theme/button";
+import { BUTTON_SIZE } from "../../core/Button/index.types";
+import AddToCartModal from "./AddToCartModal";
 
 
 const ProductScreen: React.FC<ProductScreenNavigationProp> = ({route, navigation}) => {
@@ -24,14 +25,22 @@ const ProductScreen: React.FC<ProductScreenNavigationProp> = ({route, navigation
     const { id } = route.params;
     const [product, setProduct] = useState<any>(null);
     const scrollY = useRef(new Animated.Value(0)).current;
+    const [show, setShow] = useState(false);
+    const onHandle = () => {
+        setShow(true);
+      };
+    
+      const onHide = () => {
+        setShow(false);
+      };
     const headerOpacity = scrollY.interpolate({
-        inputRange : [0, 300],
+        inputRange : [0, 200],
         outputRange: ['rgba(255,255,255,0)', 'rgba(255,255,255,1)'],
         extrapolate: "clamp",
     });
     const headerShadow = scrollY.interpolate({
-        inputRange : [0, 300],
-        outputRange: ['rgba(0,0,0,0)', 'rgba(0,0,0,1)'],
+        inputRange : [0, 200],
+        outputRange: ['rgba(204, 204, 204, 0)', 'rgba(204, 204, 204, 1)'],
         extrapolate: "clamp",
     });
      const onGetProduct = (id: string) => {
@@ -52,12 +61,18 @@ const ProductScreen: React.FC<ProductScreenNavigationProp> = ({route, navigation
     useEffect(() => {
         send(id)
     }, [])
-    const renderHeader = () => {
-        return(
-            <>
+    const renderContent = () => {
+            return(
+                <ScrollView style = {{flex : 1}}
+                onScroll={Animated.event(
+                    [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                    {
+                    useNativeDriver: false,
+                    },
+                )}>
                     <ImageBanner source = {{uri : product?.media_urls[0]?.src}}  />
                     <InfoProduct >
-                        <TitleProduct variant={TYPOGRAPHY_VARIANT.TITLE_18_MEDIUM}>MV912 / MV932 - Macbook Pro 15 inch 2019 - i9 2.3/16GB/512GB </TitleProduct>
+                        <TitleProduct variant={TYPOGRAPHY_VARIANT.TITLE_18_MEDIUM}>{product?.name}</TitleProduct>
                         <ViewExtra>
                             <IconWrapper>
                                 <Icons.Ionicons name = {IONICONS_NAME.STAR} color={COLORS.warning} size = {14} />
@@ -67,7 +82,7 @@ const ProductScreen: React.FC<ProductScreenNavigationProp> = ({route, navigation
                             </IconWrapper>
                             <IconWrapper marginLeft = {16}>
                                 <Icons.FontAwesome name = {IONICONS_NAME.CLOCK} color={COLORS.neutral_4} size = {14} />
-                                <Typography variant={TYPOGRAPHY_VARIANT.LABEL} style = {{marginLeft: 6, fontSize: 12}}>1.6km - Tầng 1, Vincom Center Phạm Ngọc Thạch </Typography>
+                                <Typography variant={TYPOGRAPHY_VARIANT.LABEL} style = {{marginLeft: 6, fontSize: 10}}>1.6km - Tầng 1, Vincom Center Phạm Ngọc Thạch </Typography>
                             </IconWrapper>
                         </ViewExtra>
                         <PriceWrapper>
@@ -75,7 +90,37 @@ const ProductScreen: React.FC<ProductScreenNavigationProp> = ({route, navigation
                         </PriceWrapper>
                     </InfoProduct>
                     <TabDetailProduct product={new Product(product)} />
-                    </>
+                </ScrollView>
+            )
+    }
+    const renderHeader = () => {
+          return(
+            <Animated.View style = {[style.header, { backgroundColor : headerOpacity, borderColor : headerShadow}]}>
+                <IconWrapperHeader onPress={() => navigation.goBack()}>
+                    <Icons.Ionicons name = {IONICONS_NAME.CLOSE} size = {20} color={COLORS.white} />
+                </IconWrapperHeader>
+                <HeaderLeft>
+                    <IconWrapperHeader style = {{marginRight: 8}}>
+                        <Icons.Ionicons name = {IONICONS_NAME.CART_OUTLINE} size = {20} color={COLORS.white} />
+                    </IconWrapperHeader>
+                    <IconWrapperHeader style = {{marginRight: 8}}>
+                        <Icons.Ionicons name = {IONICONS_NAME.HEART_OUTLINE} size = {20} color={COLORS.white} />
+                    </IconWrapperHeader>
+                    <IconWrapperHeader>
+                        <Icons.MaterialCommunityIcons name = {IONICONS_NAME.DOTS_HORIZONTAL} size = {20} color={COLORS.white} />
+                    </IconWrapperHeader>
+                </HeaderLeft>
+            </Animated.View>
+          )
+    }
+    const renderFooter = () => {
+        return (
+            <FooterWrapper>
+                <Button onPress={onHandle} variant={BUTTON_VARIANT.secondary} size= {BUTTON_SIZE.lg}>
+                    <Icons.Ionicons name = {IONICONS_NAME.CART_OUTLINE} size = {16} color={COLORS.white} />
+                    Thêm vào giỏ hàng
+                </Button>
+            </FooterWrapper>
         )
     }
     return(
@@ -83,36 +128,10 @@ const ProductScreen: React.FC<ProductScreenNavigationProp> = ({route, navigation
             { product && <>
                 { Platform.OS === 'android' && <StatusBar translucent barStyle={'dark-content'}  backgroundColor='transparent' />}
                 <ProductScreenWrapper>
-                    <Animated.View style = {[style.header, { backgroundColor : headerOpacity, shadowColor : headerShadow}]}>
-                        <IconWrapperHeader onPress={() => navigation.goBack()}>
-                            <Icons.Ionicons name = {IONICONS_NAME.CLOSE} size = {20} color={COLORS.white} />
-                        </IconWrapperHeader>
-                        <HeaderLeft>
-                            <IconWrapperHeader style = {{marginRight: 8}}>
-                                <Icons.Ionicons name = {IONICONS_NAME.CART_OUTLINE} size = {20} color={COLORS.white} />
-                            </IconWrapperHeader>
-                            <IconWrapperHeader style = {{marginRight: 8}}>
-                                <Icons.Ionicons name = {IONICONS_NAME.HEART_OUTLINE} size = {20} color={COLORS.white} />
-                            </IconWrapperHeader>
-                            <IconWrapperHeader>
-                                <Icons.MaterialCommunityIcons name = {IONICONS_NAME.DOTS_HORIZONTAL} size = {20} color={COLORS.white} />
-                            </IconWrapperHeader>
-                        </HeaderLeft>
-                    </Animated.View>
-                    <FlatList 
-                        ListHeaderComponent={renderHeader}
-                        data = {null}
-                        renderItem={null}
-                        keyExtractor={item => "key"}
-                        onScroll={Animated.event(
-                            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-                            {
-                              useNativeDriver: false,
-                            },
-                          )}
-                        scrollEventThrottle={16}
-                        style = {{flex : 1}}
-                    />
+                        <AddToCartModal product = {product} visible = {show} onHide={onHide} />
+                        {renderHeader()}
+                        {renderContent()}
+                        {renderFooter()}
                 </ProductScreenWrapper>
             </>}
         </>
@@ -132,7 +151,7 @@ const style = StyleSheet.create({
         height: 86,
         alignItems: 'flex-end',
         paddingBottom: 12,
-        elevation: 2,
+        borderBottomWidth: 1
     }
 })
 export default ProductScreen;

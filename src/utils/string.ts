@@ -11,3 +11,4 @@ export function truncate(value: string, length: number) {
     }
     return "";
   }
+export const numberWithVND = (num : number) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(num)
