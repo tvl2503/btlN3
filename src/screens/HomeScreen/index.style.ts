@@ -33,6 +33,7 @@ export const InputSearchWrapper = styled(View)`
     backgroundColor: ${(props) => props.theme.colors.white};
     alignItems: center;
     paddingHorizontal: 16px;
+    paddingVertical: 12px;
     borderWidth: 0.5px;
     borderColor: ${(props) => props.theme.colors.borderPrimary};
 `
@@ -43,6 +44,7 @@ export const ButtonSearch = styled(TouchableOpacity)`
 export const InputSearch = styled(TextInput)`
     flex : 1;
     borderWidth: 0;
+    padding: 0;
 `
 export const ProductNearYouWrapper = styled(View)`
     marginTop: 44px;
