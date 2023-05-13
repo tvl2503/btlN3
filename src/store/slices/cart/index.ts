@@ -13,6 +13,9 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+    removeCart(state) {
+      state.cart = [];
+    },
     setCart(state, action) {
       const payload = action.payload;
       if (!isArray(payload) || isEmpty(payload)) {

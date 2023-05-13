@@ -19,10 +19,13 @@ import {
   WrapperContainer,
 } from './index.style';
 import CartHeaderBackground from './ui/CartHeaderBackground';
+import { isEmpty } from 'lodash';
 
 const CartScreen = () => {
   const navigation = useNavigation();
-  const cart = useSelector<RootState, Array<CartItem>>(state => state.cart.cart);
+  const cart = useSelector<RootState, Array<CartItem>>(
+    state => state.cart.cart,
+  );
   const renderHeader = () => {
     return (
       <HeaderWrapper>
@@ -43,14 +46,20 @@ const CartScreen = () => {
     <>
       <WrapperContainer>
         <ListCartItemComposed ListHeaderComponent={renderHeader} />
-        <WrapperButton>
-          <ButtonContainer onPress={onNavigate} variant={BUTTON_VARIANT.secondary} size={BUTTON_SIZE.lg} fullWidth>
-            <RowCenter>
-              <WhiteTitle>Tổng: {toCurrency(values?.total)}</WhiteTitle>
-              <WhiteTitle>Đặt hàng ({values?.quantity})</WhiteTitle>
-            </RowCenter>
-          </ButtonContainer>
-        </WrapperButton>
+        {!isEmpty(cart) && (
+          <WrapperButton>
+            <ButtonContainer
+              onPress={onNavigate}
+              variant={BUTTON_VARIANT.secondary}
+              size={BUTTON_SIZE.lg}
+              fullWidth>
+              <RowCenter>
+                <WhiteTitle>Tổng: {toCurrency(values?.total)}</WhiteTitle>
+                <WhiteTitle>Đặt hàng ({values?.quantity})</WhiteTitle>
+              </RowCenter>
+            </ButtonContainer>
+          </WrapperButton>
+        )}
       </WrapperContainer>
     </>
   );

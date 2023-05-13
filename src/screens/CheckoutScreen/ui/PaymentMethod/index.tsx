@@ -14,10 +14,12 @@ import {
   Title,
 } from './index.style';
 import { isFunction } from 'lodash';
+import { PaymentMethodProps as PaymentMethodProperty } from '../CartItemElement/index.types';
+import { CASH } from '../../../../constants/payment';
 
 interface PaymentMethodProps extends AliasComponent {
   onSubmitForm?: (data: PaymentMethodProps) => void;
-  data?: PaymentMethodProps;
+  data?: PaymentMethodProperty;
 }
 
 const PaymentMethod: FC<PaymentMethodProps> = props => {
@@ -55,7 +57,7 @@ const PaymentMethod: FC<PaymentMethodProps> = props => {
               Hình thức thanh toán
             </Title>
             <SubTitle variant={TYPOGRAPHY_VARIANT.CAPTION_14_REGULAR}>
-              Tiền mặt
+              {data?.type === CASH ? 'Tiền mặt' : 'Thẻ'}
             </SubTitle>
             <Link onPress={onHandle}>Thay đổi</Link>
           </InfoContainer>

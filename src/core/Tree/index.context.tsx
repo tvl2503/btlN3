@@ -30,6 +30,7 @@ const TreeProvider: FC<TreeProviderProps> = props => {
       setSelected(value);
     }
   }, [value, selected]);
+  console.log(selected);
   const onCheckKey = (eventKey: string, event: GestureResponderEvent) => {
     let payload: Array<string> | string | null = null;
     if (multiple && isArray(selected)) {

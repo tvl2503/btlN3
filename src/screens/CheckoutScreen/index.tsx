@@ -17,8 +17,11 @@ import {
   BoxVoucher,
   Icon,
   RowCenter,
+  Badge,
+  TextDiscount,
+  ErrorMessage,
 } from './index.style';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/types';
 import { CartItem } from '../../models/cart';
 import { TYPOGRAPHY_VARIANT } from '../../constants/theme/typography';
@@ -31,40 +34,108 @@ import { toCurrency } from '../../utils/currency';
 import { PaymentMethodProps } from './ui/CartItemElement/index.types';
 import { IONICONS_NAME } from '../../constants/icons/ionicons';
 import { TouchableOpacity } from 'react-native';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import {
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import { CheckoutStackProps } from '../../constants/stack/checkout';
 import { NAVIGATION } from '../../constants/navigation';
+import { Voucher } from '../../models/voucher';
+import { CASH } from '../../constants/payment';
+import { Address } from '../../models/address';
+import { checkout } from '../../services/checkout';
+import useCallApi from '../../hook/useCallApi';
+import { cartActions } from '../../store/slices/cart';
+import { BaseError, BaseResponse } from '../../services/shared/types';
+import { Bill } from '../../models/bill';
 
+type CheckoutParams = {
+  voucher: {
+    voucher: Voucher;
+  };
+};
 const CheckoutScreen = () => {
   const items = useSelector<RootState, Array<CartItem>>(
     state => state.cart?.cart,
   );
+  const dispatch = useDispatch();
   const navigation = useNavigation<NavigationProp<CheckoutStackProps>>();
-  const [paymentMethod, setPaymentMethod] = useState<
-    PaymentMethodProps | undefined
-  >();
+  const { params } = useRoute<RouteProp<CheckoutParams, 'voucher'>>();
+  const [address, setAddress] = useState<Address | null>(null);
+  const [error, setError] = useState<null | string>(null);
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethodProps>({
+    type: CASH,
+  });
+  const voucher = params?.voucher;
   const { bottom } = useSafeAreaInsets();
   const values = useMemo(() => {
-    return getTotal(items);
-  }, [items]);
+    const { total, quantity } = getTotal(items);
+    let totalValue = total;
+    if (voucher) {
+      totalValue -= (totalValue * voucher.discount_value) / 100;
+      totalValue = +totalValue.toFixed(2);
+    }
+    return {
+      total: totalValue,
+      quantity,
+    };
+  }, [items, voucher]);
 
   const onSubmit = (data: PaymentMethodProps) => {
     setPaymentMethod(data);
   };
   const onNavigate = () => {
-    navigation.navigate(NAVIGATION.VOUCHER);
+    navigation.navigate(NAVIGATION.VOUCHER, {
+      voucher_id: voucher?._id,
+    });
   };
+
+  const onChangeAddress = (data: Address) => {
+    setAddress(data);
+  };
+
+  const onCheckout = () => {
+    if (!address) {
+      return;
+    }
+    setError(null);
+    return checkout({
+      address: address?._id,
+      payment_method: paymentMethod.type,
+      card: paymentMethod?.card,
+      voucher: voucher?._id,
+    });
+  };
+
+  const onCallbackSuccess = (data: BaseResponse<Bill>) => {
+    dispatch(cartActions.removeCart());
+    navigation.replace(NAVIGATION.SUCCESS_CHECKOUT, {
+      bill: data?.data,
+    });
+  };
+
+  const onCallbackError = (err: BaseError<string>) => {
+    setError(err?.message || 'Có lỗi xảy ra, xin thử lại sau');
+  };
+
+  const { isLoading, send } = useCallApi({
+    request: onCheckout,
+    error: onCallbackError,
+    success: onCallbackSuccess,
+  });
   return (
     <ViewSize>
       <ScrollView>
         <CheckoutContainer>
           <CardCustom>
-            <AddressComposed />
+            <AddressComposed onGetAddress={onChangeAddress} />
           </CardCustom>
           <CardPaymnetComposed>
             <PaymentMethodComposed
-              data={paymentMethod as any}
-              onSubmitForm={onSubmit as any}
+              data={paymentMethod}
+              onSubmitForm={onSubmit}
             />
           </CardPaymnetComposed>
         </CheckoutContainer>
@@ -81,11 +152,21 @@ const CheckoutScreen = () => {
         <TouchableOpacity onPress={onNavigate}>
           <RowCenter>
             <Typography>Voucher</Typography>
-            <Icon name={IONICONS_NAME.CHEVRON_RIGHT} />
+            <RowCenter>
+              {!voucher && <Icon name={IONICONS_NAME.CHEVRON_RIGHT} />}
+              {voucher && (
+                <Badge>
+                  <TextDiscount variant={TYPOGRAPHY_VARIANT.CAPTION_12_MEDIUM}>
+                    -{voucher?.discount_value}%
+                  </TextDiscount>
+                </Badge>
+              )}
+            </RowCenter>
           </RowCenter>
         </TouchableOpacity>
       </BoxVoucher>
       <BoxTotal style={{ paddingBottom: bottom }}>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
         <RowEnd>
           <Typography>Tổng tiền</Typography>
           <Price variant={TYPOGRAPHY_VARIANT.HEADING_4}>
@@ -93,6 +174,9 @@ const CheckoutScreen = () => {
           </Price>
         </RowEnd>
         <Button
+          onPress={send}
+          loading={isLoading}
+          disabled={isLoading}
           size={BUTTON_SIZE.lg}
           fullWidth
           variant={BUTTON_VARIANT.secondary}>

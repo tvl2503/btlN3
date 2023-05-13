@@ -72,3 +72,19 @@ export const RowCenter = styled(Row)`
   align-items: center;
   justify-content: space-between;
 `;
+
+export const Badge = styled(View)`
+  padding: ${props => props.theme.sizes.sm};
+  background: ${props => props.theme.colors.light_secondary};
+  border-radius: ${props => props.theme.sizes.sm};
+`;
+
+export const TextDiscount = styled(Typography)`
+  color: ${props => props.theme.colors.secondary};
+`;
+
+export const ErrorMessage = styled(Typography)`
+  padding-bottom: ${props => props.theme.sizes.xl};
+  color: ${props => props.theme.colors.danger};
+  text-align: center;
+`;
