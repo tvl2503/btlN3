@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { isFunction } from 'lodash';
 import { ModalProps } from '../../../../core/Modal/index.types';
 import Modal from '../../../../core/Modal';
@@ -20,7 +20,7 @@ interface ModalSelectPaymentMethodProps extends ModalProps {
   data?: PaymentMethodProps;
 }
 const ModalSelectPaymentMethod: FC<ModalSelectPaymentMethodProps> = props => {
-  const { onSubmitHandler, data, ...rest } = props;
+  const { onSubmitHandler, data, visible, onHide, ...rest } = props;
   const [method, setMethod] = useState<string | null>(data?.type || CASH);
 
   const onCheck = (key: string | Array<string>) => {
@@ -34,16 +34,24 @@ const ModalSelectPaymentMethod: FC<ModalSelectPaymentMethodProps> = props => {
         card: params,
       });
     }
+    if (isFunction(onHide)) {
+      onHide();
+    }
   };
 
+  useEffect(() => {
+    if (!visible) {
+      setMethod(data?.type || CASH);
+    }
+  }, [visible, data]);
   return (
-    <Modal {...rest}>
+    <Modal visible={visible} onHide={onHide} {...rest}>
       <ModalHeaderComposed buttonClose={false}>
         <Typography variant={TYPOGRAPHY_VARIANT.HEADING_2}>
           Chọn hình thức thanh toán
         </Typography>
       </ModalHeaderComposed>
-      <Tree value={method as any} onCheck={onCheck}>
+      <Tree value={method} onCheck={onCheck}>
         {PAYMENT_METHODS.map(item => (
           <Tree.Item key={item?.id} eventKey={item?.id}>
             {item?.title}

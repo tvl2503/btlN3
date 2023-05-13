@@ -8,6 +8,7 @@ import {
 } from './index.style';
 import { BUTTON_VARIANT } from '../../constants/theme/button';
 import { TouchableOpacity } from 'react-native/types';
+import Spinner from '../Spinner';
 
 const Button = forwardRef<TouchableOpacity, ButtonProps>((props, ref) => {
   const { children, size, as, variant, loading, ...restProps } = props;
@@ -18,7 +19,7 @@ const Button = forwardRef<TouchableOpacity, ButtonProps>((props, ref) => {
       size={size}
       {...restProps}>
       <TextButtonComposed variant={variant} as={as}>
-        {loading ? <SpinComposed size={16} type="Arc" /> : children}
+        {loading ? <Spinner size={16} color={'#fff'}/> : children}
       </TextButtonComposed>
     </TouchableOpacityComposed>
   );

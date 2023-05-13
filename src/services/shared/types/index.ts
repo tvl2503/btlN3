@@ -19,7 +19,7 @@ export interface BasePaginationResponse<T = any> extends BaseResponse<T> {
 
 export interface Filter {
   operator: string;
-  name: string;
+  key: string;
   value: any;
 }
 
