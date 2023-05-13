@@ -5,7 +5,9 @@ import Typography from '../../../core/Typography';
 import { TYPOGRAPHY_VARIANT } from '../../../constants/theme/typography';
 import FormReview from './FormReview';
 
-interface ModalCreateReviewProps extends ModalProps {}
+interface ModalCreateReviewProps extends ModalProps {
+  product_id: string
+}
 const AddReviewModal : React.FC<ModalCreateReviewProps> = (props) => {
   const { ...rest } = props;
   return (
@@ -14,7 +16,7 @@ const AddReviewModal : React.FC<ModalCreateReviewProps> = (props) => {
         <Modal.Header>
           <Typography variant={TYPOGRAPHY_VARIANT.HEADING_3}>Viết đánh giá</Typography>
         </Modal.Header>
-        <FormReview />
+        <FormReview id = {props.product_id} onHide = {props.onHide} />
       </Modal>
     </>
   )

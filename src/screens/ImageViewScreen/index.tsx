@@ -9,7 +9,7 @@ import { IONICONS_NAME } from "../../constants/icons/ionicons";
 
 const ImageViewScreen: React.FC<ImageViewNavigationProp>  = ({route, navigation}) => {
     const images = route.params.images
-    
+    const index = route.params.index
     return(
         <SafeAreaView style={{ flex: 1,  backgroundColor: COLORS.black }}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -19,7 +19,7 @@ const ImageViewScreen: React.FC<ImageViewNavigationProp>  = ({route, navigation}
             </TouchableOpacity>
             <ImageViewer
                 imageUrls={images.map((item) =>  { return {url : item.src}})}
-                index = {0}
+                index = {index || 0}
                 enableSwipeDown = { true }
             />
         </SafeAreaView>

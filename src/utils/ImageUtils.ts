@@ -7,7 +7,8 @@ export const openImagePicker = (handleChosenImage : any
     ) => {
     const  options = {
       maxWidth: 1024,
-      mediaType: 'photo'
+      mediaType: 'photo',
+      includeBase64: true
     }
     launchImageLibrary(options , (response) => {
       if (response.didCancel) {
