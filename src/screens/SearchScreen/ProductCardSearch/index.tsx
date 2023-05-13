@@ -9,6 +9,7 @@ import { COLORS } from "../../../theme/colors";
 import { useNavigation } from "@react-navigation/native";
 import { SearchScreenNavigationProp } from "../../../navigators/index.type";
 import { NAVIGATION } from "../../../constants/navigation";
+import numberWithVND from "../../../utils/numberwithvnd";
 const imgDefault = require("../../../assets/default-image.jpg")
 interface Props extends SearchScreenNavigationProp{
     product: Product
@@ -30,7 +31,7 @@ const ProductCardSearch : React.FC<Props> = ({product, navigation}) => {
             </NameProduct>
             <Line />
             <PriceWrapper>
-                <PriceText>{product.price.original_price} đ</PriceText>
+                <PriceText>{numberWithVND(product.price.discount_price || product.price.original_price)}</PriceText>
                 <Icons.MaterialCommunityIcons name = {IONICONS_NAME.DOTS_HORIZONTAL} color={COLORS.neutral_4} size = {16} />
             </PriceWrapper>
         </ProductCardWrapper>

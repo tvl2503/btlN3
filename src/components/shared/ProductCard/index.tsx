@@ -9,18 +9,14 @@ import { truncate } from './../../../utils/string';
 import { useNavigation } from "@react-navigation/native";
 import { NAVIGATION } from "../../../constants/navigation";
 import { HomeAppScreenNavigationProp } from "../../../navigators/index.type";
+import numberWithVND from "../../../utils/numberwithvnd";
+import { Product } from './../../../models/product';
 const imgDefault = require("../../../assets/default-image.jpg")
-interface Product{
-   product : {
-    _id: string,
-    media_urls: { src : string }[],
-    name: string,
-    price: {original_price : number},
-    description?: string,
-   };
-}
 
-const ProductCard = ({product} : Product) => {
+interface Props {
+    product: Product
+}
+const ProductCard : React.FC<Props> = ({product}) => {
     const navigation = useNavigation<HomeAppScreenNavigationProp>();
     const handleClick = () => {
         navigation.navigate(NAVIGATION.PRODUCT, {id : product._id})
@@ -45,7 +41,7 @@ const ProductCard = ({product} : Product) => {
             </ViewExtra>
             <Line />
             <PriceWrapper>
-                <PriceText>{product.price.original_price} đ</PriceText>
+                <PriceText>{numberWithVND(product.price.discount_price || product.price.original_price)}</PriceText>
                 <Icons.MaterialCommunityIcons name = {IONICONS_NAME.DOTS_HORIZONTAL} color={COLORS.neutral_4} size = {16} />
             </PriceWrapper>
         </ProductCardWrapper>

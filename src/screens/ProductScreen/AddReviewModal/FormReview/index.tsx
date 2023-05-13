@@ -1,29 +1,87 @@
 import React, { useState } from "react";
 import { ButtonUploadImage, FormWrapper, InputDescription, MainForm, RateStarInput, RateWrapper, TextButtonUpload, UploadImageWrapper } from "./index.styles";
 import Input from "../../../../core/Input";
-import { launchImageLibrary, launchCamera } from "react-native-image-picker";
-import Button from "../../../../core/Button";
-import { Text } from "react-native";
 import Icons from "../../../../core/Icons";
 import Modal from "../../../../core/Modal";
-const options = {
-    title: "Chọn ảnh",
-    type: "library",
-    options : {
-        maxHeight : 200,
-        maxWidth: 200,
-        selectionLimit : 0,
-        mediaType: 'photo',
-        includeBase64 : false
+import { openImagePicker } from "../../../../utils/ImageUtils";
+import { uploadImageApi } from "../../../../services/Image";
+import randString from 'random-string'
+
+export function getExtByUrl(url: string) {
+    let temp = url
+    temp = temp.substr(1 + url.lastIndexOf('/'))
+  
+    temp = temp.split('?')[0]
+  
+    temp = temp.split('#')[0]
+    temp = temp.split('.')[1] || ''
+    return temp
+  }
+  export const getMimeTypeByExtension = (ext: string) => {
+    switch (ext) {
+      case 'svg':
+        return 'image/svg+xml'
+      case 'jpg':
+      case 'jpeg':
+        return 'image/jpeg'
+      case 'png':
+        return 'image/png'
+      case 'gif':
+        return 'image/gif'
+      case 'webp':
+        return 'image/webp'
+  
+      case 'aac':
+        return 'audio/aac'
+      case 'mp3':
+      case 'mpe':
+      case 'mpg':
+      case 'mpga':
+        return 'audio/mpeg'
+      case 'm3u':
+        return 'audio/x-mpegurl'
+  
+      case 'mov':
+        return 'video/quicktime'
+      case 'mp4':
+        return 'video/mp4'
+      case 'avi':
+        return 'video/x-msvideo'
+      case '3gp':
+        return 'video/3gpp'
+      case 'm3u8':
+        return 'application/x-mpegURL'
+      case 'flv':
+        return 'video/x-flv'
+      case 'wmv':
+        return 'video/x-ms-wmv'
+      default:
+        return ''
     }
-}
+  }
 const FormReview = () => {
     const [star, setStar] = useState<number>(0);
+    const uploadImage = async (response : any) => {
+        const data = new FormData()
+        const ext = getExtByUrl(response.uri)
+        const mime = getMimeTypeByExtension(ext)
+        const nameDefault = `${randString({ length: 15 })}${ext ? `.${ext}` : ''}`
+        const typeDefault = mime || 'video/mp4'
+        data.append("file_upload", {
+            name: nameDefault,
+            type: typeDefault,
+            uri:  response.uri
+        })
+        
+        try{
+            const res = await uploadImageApi(data)
+        }catch(error){
+            console.log(error);
+            
+        }
+    }
     const openGallery = async () => {
-        
-        const result = await launchImageLibrary(options)
-        console.log(result);
-        
+        openImagePicker(uploadImage)
     }
     return(
         <>

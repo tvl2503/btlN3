@@ -6,6 +6,7 @@ import Typography from "../../core/Typography";
 export const SearchScreenwrapper = styled(View)`
     flex: 1;
     backgroundColor: #F5F5F5;
+    marginBottom: 10px;
 `
 export const HeaderWrapper = styled(View)`
     height: 92px;

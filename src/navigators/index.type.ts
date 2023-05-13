@@ -7,6 +7,7 @@ export type RootStackParamList = {
   [NAVIGATION.PRODUCT]: { id: string };
   [NAVIGATION.SEARCH]: { keyword: string };
   [NAVIGATION.CREATE_ADDRESS]: undefined;
+  [NAVIGATION.IMAGE_VIEW]: {images: Array<any>};
 };
 
 export type HomeAppScreenNavigationProp = NativeStackNavigationProp<
@@ -24,4 +25,8 @@ export type SearchScreenNavigationProp = StackScreenProps<
 export type CreateAddressNavigationProp = StackScreenProps<
   RootStackParamList,
   NAVIGATION.CREATE_ADDRESS
+>;
+export type ImageViewNavigationProp = StackScreenProps<
+  RootStackParamList,
+  NAVIGATION.IMAGE_VIEW
 >;

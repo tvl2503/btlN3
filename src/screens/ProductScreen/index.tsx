@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FooterWrapper, HeaderLeft, HeaderWrapper, IconWrapper, IconWrapperHeader, ImageBanner, InfoProduct, Price, PriceWrapper, ProductScreenWrapper, TitleProduct, ViewExtra } from "./index.styles";
+import { FooterWrapper, HeaderLeft, HeaderWrapper, IconWrapper, IconWrapperHeader, ImageBanner, InfoProduct, Price, PriceOld, PriceWrapper, ProductScreenWrapper, TitleProduct, ViewExtra } from "./index.styles";
 import useCallApi from "../../hook/useCallApi";
 import { getProduct } from "../../services/product";
 import { Animated, FlatList, Platform, ScrollView, StatusBar, StyleSheet } from "react-native";
@@ -18,6 +18,7 @@ import Button from "../../core/Button";
 import { BUTTON_VARIANT } from "../../constants/theme/button";
 import { BUTTON_SIZE } from "../../core/Button/index.types";
 import AddToCartModal from "./AddToCartModal";
+import { NAVIGATION } from "../../constants/navigation";
 
 
 const ProductScreen: React.FC<ProductScreenNavigationProp> = ({route, navigation}) => {
@@ -87,6 +88,7 @@ const ProductScreen: React.FC<ProductScreenNavigationProp> = ({route, navigation
                         </ViewExtra>
                         <PriceWrapper>
                             <Price>{numberWithVND(product.price.discount_price)}</Price>
+                            <PriceOld>{numberWithVND(product.price.original_price)}</PriceOld>
                         </PriceWrapper>
                     </InfoProduct>
                     <TabDetailProduct product={new Product(product)} />
@@ -100,7 +102,7 @@ const ProductScreen: React.FC<ProductScreenNavigationProp> = ({route, navigation
                     <Icons.Ionicons name = {IONICONS_NAME.CLOSE} size = {20} color={COLORS.white} />
                 </IconWrapperHeader>
                 <HeaderLeft>
-                    <IconWrapperHeader style = {{marginRight: 8}}>
+                    <IconWrapperHeader style = {{marginRight: 8}} onPress={() => navigation.navigate(NAVIGATION.CART)}>
                         <Icons.Ionicons name = {IONICONS_NAME.CART_OUTLINE} size = {20} color={COLORS.white} />
                     </IconWrapperHeader>
                     <IconWrapperHeader style = {{marginRight: 8}}>

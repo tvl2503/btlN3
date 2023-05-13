@@ -8,6 +8,7 @@ export enum NAVIGATION {
   HOME_APP = 'HomeAppScreen',
   PRODUCT = 'ProductScreen',
   SEARCH = 'SearchScreen',
+  IMAGE_VIEW = 'ImageViewScreen',
   // HOME APP
   HOME = 'HomeScreen',
   CATEGORY = 'CategoryScreen',

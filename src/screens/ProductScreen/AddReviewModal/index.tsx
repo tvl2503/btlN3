@@ -15,8 +15,6 @@ const AddReviewModal : React.FC<ModalCreateReviewProps> = (props) => {
           <Typography variant={TYPOGRAPHY_VARIANT.HEADING_3}>Viết đánh giá</Typography>
         </Modal.Header>
         <FormReview />
-        <Modal.Footer>    
-        </Modal.Footer>
       </Modal>
     </>
   )

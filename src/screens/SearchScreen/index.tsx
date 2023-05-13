@@ -13,16 +13,24 @@ import { getAllProduct } from "../../services/product";
 import useCallApi from "../../hook/useCallApi";
 import ProductCardSearch from "./ProductCardSearch";
 import { View } from "react-native";
+import FilterModal from "./FilterModal";
 
 
 const SearchScreen : React.FC<SearchScreenNavigationProp> = ({route, navigation}) => {
     const { keyword } = route.params;
     const [products, setProducts] = useState<Product[]>([]);
+    const [showFilter, setShowFilter] = useState(false);
+    const onHandle = () => {
+        setShowFilter(true);
+      };
+    
+      const onHide = () => {
+        setShowFilter(false);
+      };
     const onGetProduct = (data: ProductRequest) => {
         return getAllProduct(data);
     }
     const onCallbackSuccess = (data: any) => {
-        
         setProducts(data.data)
       };
     
@@ -45,6 +53,7 @@ const SearchScreen : React.FC<SearchScreenNavigationProp> = ({route, navigation}
     } , [])
     return (
         <SearchScreenwrapper>
+            <FilterModal visible = {showFilter} onHide={onHide} />
             <StatusBar translucent barStyle={'dark-content'}  />
             <HeaderWrapper>
                 <IconWrapperHeader onPress={() => navigation.goBack()}>
@@ -53,7 +62,7 @@ const SearchScreen : React.FC<SearchScreenNavigationProp> = ({route, navigation}
                 <TitleHeader variant= {TYPOGRAPHY_VARIANT.TITLE_18_MEDIUM}>
                     Tìm kiếm: {keyword}
                 </TitleHeader>
-                <IconWrapperHeader>
+                <IconWrapperHeader onPress={onHandle}>
                     <FilterSVG />
                 </IconWrapperHeader>
             </HeaderWrapper>
@@ -67,6 +76,7 @@ const SearchScreen : React.FC<SearchScreenNavigationProp> = ({route, navigation}
                         numColumns={2}
                         ItemSeparatorComponent = {() => <View style={{height: 16}} />}
                         columnWrapperStyle = {{ justifyContent: "space-between" }}
+                        showsVerticalScrollIndicator = {false}
                     />
                 }
             </ListProductWrapper>

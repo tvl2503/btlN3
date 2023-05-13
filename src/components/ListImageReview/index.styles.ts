@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import Image from "../../core/Image";
 import Typography from "../../core/Typography";
 
@@ -13,7 +13,7 @@ export const ImageReview = styled(Image)`
     width: 106px;
     height: 106px;
 `
-export const ViewMore = styled(View)`
+export const ViewMore = styled(TouchableOpacity)`
     position: absolute;
     top: 0;
     right: 0;

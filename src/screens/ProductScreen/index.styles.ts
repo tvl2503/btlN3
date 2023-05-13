@@ -53,9 +53,16 @@ export const IconWrapper = styled(View)<IconWrapperProp>`
 `
 export const PriceWrapper = styled(View)`
     alignItems: flex-end;
+    flexDirection: row;
+
 `
 export const Price = styled(Typography)`
     color : ${props => props.theme.colors.danger}
+`
+export const PriceOld = styled(Typography)`
+    textDecorationLine : line-through;
+    color : ${props => props.theme.colors.gray};
+    marginLeft : 8px;
 `
 export const FooterWrapper = styled(View)`
     position: absolute;

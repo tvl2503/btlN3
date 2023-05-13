@@ -13,6 +13,7 @@ import { Review } from '../../../types/review'
 import { getDayMonth } from '../../../utils/date'
 import ListImageReview from '../../../components/ListImageReview'
 import AddReviewModal from '../AddReviewModal'
+import EditorSVG from '../../../assets/svg/EditorSVG'
 
 interface Props{
     id : string
@@ -66,7 +67,7 @@ const TabRate : React.FC<Props> = ({id}) => {
         </RateNumeralWrapper>}
         <ListReivewWrapper>
             <ListReivewHeader>
-                <LinkText onPress={onHandle}>Viết đánh giá</LinkText>
+                <LinkText onPress={onHandle}> <EditorSVG /> Viết đánh giá</LinkText>
             </ListReivewHeader>
             {
                 reviews.map((item : Review, index) => (
