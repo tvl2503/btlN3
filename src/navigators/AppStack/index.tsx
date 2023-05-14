@@ -4,13 +4,13 @@ import { NAVIGATION } from '../../constants/navigation';
 import HomeScreen from '../../screens/HomeScreen';
 import CategoryScreen from '../../screens/CategoryScreen';
 import NewsScreen from '../../screens/NewsScreen';
-import ProfileScreen from '../../screens/ProfileScreen';
 import Icons from '../../core/Icons';
 import { COLORS } from '../../theme/colors';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/types';
 import AuthStack from '../AuthStack';
 import CartStack from '../CartStack';
+import ProfileStack from '../ProfileStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -92,7 +92,7 @@ const AppStack = () => {
       />
       <Tab.Screen
         name={NAVIGATION.PROFILE}
-        component={ProfileScreen}
+        component={ProfileStack}
         options={{ title: 'Cá nhân' }}
       />
     </Tab.Navigator>

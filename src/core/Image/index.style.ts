@@ -3,8 +3,6 @@ import { Image, View } from 'react-native';
 import { ImageProps } from './index.types';
 
 export const ImageComponentComposed = styled(Image)<ImageProps>`
-  width: 100%;
-  height: 100%;
   border-radius: ${props => props.theme.sizes.sm}
 `;
 

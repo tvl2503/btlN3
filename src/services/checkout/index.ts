@@ -13,3 +13,5 @@ interface CheckoutRequestBody {
 export const checkout = (body: CheckoutRequestBody) => {
   return request.post('/checkout/create', body);
 };
+
+export const getListCheckout = '/checkout/list';

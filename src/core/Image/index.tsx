@@ -6,7 +6,7 @@ import { ImageComponentComposed, LoadingContainer } from './index.style';
 import { ImageProps } from './index.types';
 
 const Image: FC<ImageProps> = props => {
-  const { source, onError, ...rest } = props;
+  const { source, onError, style, ...rest } = props;
   const [sourceImage, setSourceImage] = useState(source);
   const [loaded, setLoaded] = useState(false);
 
@@ -26,7 +26,7 @@ const Image: FC<ImageProps> = props => {
   return (
     <>
       {!loaded && (
-        <LoadingContainer>
+        <LoadingContainer style={style} {...rest}>
           <Spinner />
         </LoadingContainer>
       )}
@@ -34,6 +34,7 @@ const Image: FC<ImageProps> = props => {
         onError={onHandleError}
         source={sourceImage}
         onLoad={onLoadedImage}
+        style={!loaded ? {} : style}
         {...rest}
       />
     </>

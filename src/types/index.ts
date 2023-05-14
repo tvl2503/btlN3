@@ -1,6 +1,7 @@
 import { ElementType } from 'react';
+import { ViewProps } from 'react-native';
 
-export interface AliasComponent<T = any> {
+export interface AliasComponent<T = any> extends ViewProps {
   as?: ElementType<T>;
 }
 

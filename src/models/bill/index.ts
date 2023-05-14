@@ -17,5 +17,7 @@ export interface Bill {
   status?: BILL_STATUS;
   transaction_id: string;
   _id: string;
+  payment_info?: any;
   payment_id?: string;
+  creation_time: number;
 };

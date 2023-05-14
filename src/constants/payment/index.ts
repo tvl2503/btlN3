@@ -9,4 +9,4 @@ export const PAYMENT_METHODS = [
     id: CARD,
     title: 'Thanh toán bằng thẻ'
   },
-]
+];

@@ -74,7 +74,10 @@ const FormReview = () => {
         })
         
         try{
-            const res = await uploadImageApi(data)
+            const res = await uploadImageApi({
+              data: [`data:${response.type};base64,${response.base64}`]
+        })
+        console.log(res);
         }catch(error){
             console.log(error);
             

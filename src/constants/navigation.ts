@@ -28,5 +28,15 @@ export enum NAVIGATION {
   CHECKOUT_HOME = 'CheckoutHome',
   PAYMENT_METHOD = 'PaymentMethodScreen',
   VOUCHER = 'VoucherScreen',
-  SUCCESS_CHECKOUT = 'SuccessCheckoutScreen'
+  SUCCESS_CHECKOUT = 'SuccessCheckoutScreen',
+
+  // RATING
+
+  RATING_SCREEN = 'RatingScreen',
+
+  // History
+
+  TRANSACTION_HISTORY = 'TransactionHistoryScreen',
+  PROFILE_HOME = 'ProfileHomeScreen',
+  TRANSACTION_DETAIL = 'TransactionDetail',
 }

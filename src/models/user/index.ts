@@ -1,9 +1,9 @@
 export class User {
-  private email?: string;
-  private phone_number?: string;
-  private username?: string;
-  private validated?: boolean;
-  private _id: string;
+  public email?: string;
+  public phone_number?: string;
+  public username?: string;
+  public validated?: boolean;
+  public _id: string;
 
   constructor(props: User) {
     this.email = props.email;

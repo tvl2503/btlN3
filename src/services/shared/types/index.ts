@@ -23,6 +23,15 @@ export interface Filter {
   value: any;
 }
 
+export enum FILTER_OPERATOR {
+  EQUAL = 'equal',
+  IN = 'in',
+  GREATER = 'greater',
+  LOWER = 'lower',
+  LIKE = 'like',
+  OR = 'or'
+}
+
 export interface Sort {
   key: string;
   operator: 1 | -1;
