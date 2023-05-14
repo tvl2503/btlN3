@@ -14,5 +14,6 @@ export enum IONICONS_NAME {
   PAYMENT = 'payment',
   CHEVRON_RIGHT = 'md-chevron-forward-outline',
   CREDIT_CARD = 'credit-card',
-  SEARCH_OUTLINE = 'search-outline'
+  SEARCH_OUTLINE = 'search-outline',
+  CLOSE_CIRCLE = 'close-circle'
 }

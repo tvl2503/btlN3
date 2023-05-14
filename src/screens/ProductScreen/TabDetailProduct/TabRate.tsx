@@ -44,10 +44,10 @@ const TabRate : React.FC<Props> = ({id}) => {
     })
     useEffect(() => {
         send(id)
-    }, [id])
+    }, [id, show])
   return (
     <>
-    <AddReviewModal adjustToContentHeight  = {false} visible = {show} onHide={onHide} />
+    <AddReviewModal  product_id = {id} visible = {show} onHide={onHide} />
     <View style = {{flex : 1}}>
         {
             isLoading &&

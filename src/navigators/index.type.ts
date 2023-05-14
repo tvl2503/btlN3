@@ -7,7 +7,7 @@ export type RootStackParamList = {
   [NAVIGATION.PRODUCT]: { id: string };
   [NAVIGATION.SEARCH]: { keyword: string };
   [NAVIGATION.CREATE_ADDRESS]: undefined;
-  [NAVIGATION.IMAGE_VIEW]: {images: Array<any>};
+  [NAVIGATION.IMAGE_VIEW]: {images: Array<any>, index: number};
 };
 
 export type HomeAppScreenNavigationProp = NativeStackNavigationProp<
