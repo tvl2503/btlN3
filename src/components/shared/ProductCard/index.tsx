@@ -32,7 +32,7 @@ const ProductCard : React.FC<Props> = ({product}) => {
             <ViewExtra>
                 <IconWrapper>
                     <Icons.Ionicons name = {IONICONS_NAME.STAR} color={COLORS.warning} size = {14} />
-                    <Typography variant={TYPOGRAPHY_VARIANT.LABEL} style = {{marginLeft: 6, fontSize: 10}}>4.4(80)</Typography>
+                    <Typography variant={TYPOGRAPHY_VARIANT.LABEL} style = {{marginLeft: 6, fontSize: 10}}>{`${product.rating}(${product.num_reviews})`}</Typography>
                 </IconWrapper>
                 <IconWrapper marginLeft = {16}>
                     <Icons.FontAwesome name = {IONICONS_NAME.CLOCK} color={COLORS.neutral_4} size = {14} />

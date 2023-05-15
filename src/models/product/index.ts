@@ -10,6 +10,7 @@ export class Product {
     public num_buy: number;
     public num_reviews: number;
     public shop: string | Shop;
+    public rating: number;
     public price: {
         discount_price: number;
         original_price: number
@@ -31,6 +32,7 @@ export class Product {
       this.price = props.price;
       this.media_urls = props.media_urls;
       this.shop = shop;
+      this.rating = props.rating;
     }
   
     public get getName(): string | undefined {

@@ -10,7 +10,7 @@ export const ContainerHomeScreen = styled(ScrollView)`
     backgroundColor : ${(props) => props.theme.colors.white}
 `;
 export const BannerWrapper = styled(View)`
-
+    marginBottom: 44px;
 `
 export const BannerImage = styled(Image)`
     width: 100%;
@@ -47,7 +47,7 @@ export const InputSearch = styled(TextInput)`
     padding: 0;
 `
 export const ProductNearYouWrapper = styled(View)`
-    marginTop: 44px;
+    marginBottom: 44px;
 `
 export const TitleProductNearYou = styled(View)`
     flexDirection: row;
@@ -58,5 +58,5 @@ export const TitleProductNearYou = styled(View)`
 export const BannerSale = styled(Image)`
     width: 100%;
     height: 167px;
-    marginTop: 28px;
+    marginBottom: 28px;
 `

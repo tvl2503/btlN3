@@ -23,7 +23,7 @@ const TabDetailProduct : React.FC<Props> = ({product}) => {
     return (
         <View style = {{flex: 1, marginBottom: 100}}>
             <TabInfo product={product} />
-            <TabRate id={product._id} />
+            <TabRate id={product._id} product={product} />
         </View>
     )
 }

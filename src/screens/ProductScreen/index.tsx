@@ -118,7 +118,7 @@ const ProductScreen: React.FC<ProductScreenNavigationProp> = ({route, navigation
     const renderFooter = () => {
         return (
             <FooterWrapper>
-                <Button onPress={onHandle} variant={BUTTON_VARIANT.secondary} size= {BUTTON_SIZE.lg}>
+                <Button onPress={onHandle} variant={BUTTON_VARIANT.secondary} fullWidth size= {BUTTON_SIZE.lg}>
                     <Icons.Ionicons name = {IONICONS_NAME.CART_OUTLINE} size = {16} color={COLORS.white} />
                     Thêm vào giỏ hàng
                 </Button>

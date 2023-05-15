@@ -20,6 +20,7 @@ const SearchScreen : React.FC<SearchScreenNavigationProp> = ({route, navigation}
     const { keyword } = route.params;
     const [products, setProducts] = useState<Product[]>([]);
     const [showFilter, setShowFilter] = useState(false);
+    const [filter, setFilter] = useState()
     const onHandle = () => {
         setShowFilter(true);
       };
@@ -50,7 +51,7 @@ const SearchScreen : React.FC<SearchScreenNavigationProp> = ({route, navigation}
                 operator : "like"}
             ]
         })
-    } , [])
+    } , [keyword])
     return (
         <SearchScreenwrapper>
             <FilterModal visible = {showFilter} onHide={onHide} />
