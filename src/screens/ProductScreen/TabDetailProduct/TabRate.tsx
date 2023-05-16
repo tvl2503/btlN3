@@ -16,9 +16,10 @@ import AddReviewModal from '../AddReviewModal'
 import EditorSVG from '../../../assets/svg/EditorSVG'
 
 interface Props{
-    id : string
+    id : string,
+    product: Product
 }
-const TabRate : React.FC<Props> = ({id}) => {
+const TabRate : React.FC<Props> = ({id, product}) => {
     const [reviews, setReviews] = useState([]);
     const [show, setShow] = useState(false);
     const onHandle = () => {
@@ -66,9 +67,9 @@ const TabRate : React.FC<Props> = ({id}) => {
             </RateNumeralRight>
         </RateNumeralWrapper>}
         <ListReivewWrapper>
-            <ListReivewHeader>
+            { product.is_allow_review && <ListReivewHeader>
                 <LinkText onPress={onHandle}> <EditorSVG /> Viết đánh giá</LinkText>
-            </ListReivewHeader>
+            </ListReivewHeader>}
             {
                 reviews.map((item : Review, index) => (
                     <ListReivewDetail key = {index}>

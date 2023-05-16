@@ -55,6 +55,7 @@ const HomeScreen: React.FC = () => {
                 <BannerSale 
                     source={require('../../assets/bannerSale.png')}
                 />
+                <ListProduct title='Giá rẻ' query={{sort : { key : "price", operator : 1 }}} />
                 
             </ContainerHomeScreen>
         </>

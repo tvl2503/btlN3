@@ -73,6 +73,7 @@ export const FooterWrapper = styled(View)`
     left: 0;
     right: 0;
     backgroundColor: ${props => props.theme.colors.white};
-    paddingTop: 8px;
+    paddingTop: 16px;
     paddingBottom: 30px;
+    paddingHorizontal: 16px;
 `
