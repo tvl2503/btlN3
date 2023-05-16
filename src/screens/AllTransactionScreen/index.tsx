@@ -22,6 +22,7 @@ import { TouchableOpacity } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { ProfileStackProps } from '../../navigators/ProfileStack';
 import { NAVIGATION } from '../../constants/navigation';
+import useTransaction from './hook/useTransaction';
 
 interface AllTransactionScreenProps extends SceneRendererProps {
   route: Route;
@@ -47,7 +48,7 @@ const AllTransactionScreen: FC<AllTransactionScreenProps> = props => {
       filter: filter,
     };
   }, [routeKey]);
-  const { data, error, isLoading } = useQuery<
+  const { data, error, isLoading, setData } = useQuery<
     BasePaginationResponse<Array<Bill>>
   >({
     url: getListCheckout,
@@ -58,7 +59,9 @@ const AllTransactionScreen: FC<AllTransactionScreenProps> = props => {
     useCache: false,
     deps: [routeKey],
   });
-
+  useTransaction({
+    setData
+  });
   const onNavigate = (item: Bill) => {
     navigation.navigate(NAVIGATION.TRANSACTION_DETAIL, {
       detail: item

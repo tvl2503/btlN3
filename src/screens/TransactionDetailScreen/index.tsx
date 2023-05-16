@@ -1,13 +1,15 @@
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
-import React from 'react';
-import { Bill } from '../../models/bill';
+import React, { useEffect, useState } from 'react';
+import { BILL_STATUS, Bill } from '../../models/bill';
 import AddressTransaction from './ui/AddressTransaction';
 import TransactionItems from './ui/TransactionItems';
 import TransactionPaymentMethod from './ui/TransactionPaymentMethod';
 import InfoBill from './ui/InfoBill';
 import { ScrollViewComposed, ViewBase } from './index.style';
 import DetailTransactionActions from './ui/DetailTransactionActions';
+import useListenerAction from '../../hook/useListenerAction';
+import { ACTION_TYPE } from '../../constants/actions';
 
 type RouteParams = {
   bill: {
@@ -16,10 +18,25 @@ type RouteParams = {
 };
 const TransactionDetailScreen = () => {
   const route = useRoute<RouteProp<RouteParams, 'bill'>>();
-  const bill = route?.params?.detail;
+  const { data } = useListenerAction<{billId?: string}>({
+    key: ACTION_TYPE.CANCEL_BILL
+  });
+  const [bill, setBill] = useState(route?.params?.detail)
   const items = bill?.items;
   const address = bill?.address;
   const payment_method = bill?.payment_method;
+
+  useEffect(() => {
+    if (!data || !data?.data?.billId) {
+      return;
+    }
+    setBill(prevState => {
+      return {
+        ...prevState,
+        status: BILL_STATUS.CANCEL
+      }
+    })
+  }, [data]);
   return (
     <ViewBase>
       <ScrollViewComposed>

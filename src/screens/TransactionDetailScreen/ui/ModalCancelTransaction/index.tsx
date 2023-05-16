@@ -9,18 +9,58 @@ import { BUTTON_SIZE } from '../../../../core/Button/index.types';
 import { StyleSheet } from 'react-native';
 import { TYPOGRAPHY_VARIANT } from '../../../../constants/theme/typography';
 import { isFunction } from 'lodash';
+import { FormData } from '../../../../core/Form/FormInstance';
+import { cancelCheckout } from '../../../../services/checkout';
+import useCallApi from '../../../../hook/useCallApi';
+import { BaseResponse } from '../../../../services/shared/types';
+import useDispatchAction from '../../../../hook/useDispatchAction';
+import { ACTION_TYPE } from '../../../../constants/actions';
 
 interface ModalCancelTransactionProps extends ModalProps {
   billId?: string;
 }
 const ModalCancelTransaction: FC<ModalCancelTransactionProps> = props => {
-  const { onHide, ...rest } = props;
+  const { onHide, billId, ...rest } = props;
 
-  const onSubmitForm = () => {
-    
+  const dispatchAction = useDispatchAction();
+
+  const onCancelCheckout = (reason: string) => {
+    if (!billId) {
+      return;
+    }
+    return cancelCheckout(billId, reason);
+  };
+
+  const onCallbackSuccess = (_: BaseResponse) => {
+    if (isFunction(onHide)) {
+      onHide();
+    }
+    dispatchAction(ACTION_TYPE.CANCEL_BILL, {
+      billId,
+    });
+  };
+
+  const onCallbackError = (err: string) => {
+    console.log(err);
+  }
+  const { isLoading, send } = useCallApi({
+    request: onCancelCheckout,
+    error: onCallbackError,
+    success: onCallbackSuccess
+  })
+
+  const onSubmitForm = (data: FormData) => {
+    if (!billId) {
+      return;
+    }
+    const reason = data?.reason;
+    if (!reason) {
+      return;
+    }
+    return send(reason);
   }
   return (
-    <Modal {...rest}>
+    <Modal onHide={onHide} {...rest}>
       <Modal.Header>
         <Typography variant={TYPOGRAPHY_VARIANT.HEADING_2}>Hủy đơn hàng</Typography>
       </Modal.Header>
@@ -34,7 +74,7 @@ const ModalCancelTransaction: FC<ModalCancelTransactionProps> = props => {
                 name="reason"
               />
               <Modal.Footer style={styles.resize}>
-                <Button disabled={!isValidForm} onPress={onSubmit} fullWidth size={BUTTON_SIZE.lg}>
+                <Button loading={isLoading} disabled={!isValidForm || isLoading} onPress={onSubmit} fullWidth size={BUTTON_SIZE.lg}>
                   Huỷ đơn hàng
                 </Button>
               </Modal.Footer>

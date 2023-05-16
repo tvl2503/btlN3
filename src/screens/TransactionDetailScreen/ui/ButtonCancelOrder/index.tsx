@@ -8,6 +8,7 @@ interface ButtonCancelOrderProps extends ButtonProps {
   billId?: string;
 }
 const ButtonCancelOrder: FC<ButtonCancelOrderProps> = props => {
+  const { billId } = props;
   const [show, setShow] = useState(false);
   const onCancel = () => {
     setShow(true);
@@ -15,10 +16,10 @@ const ButtonCancelOrder: FC<ButtonCancelOrderProps> = props => {
 
   const onHide = () => {
     setShow(false);
-  }
+  };
   return (
     <>
-      <ModalCancelTransaction visible={show} onHide={onHide}/>
+      <ModalCancelTransaction billId={billId} visible={show} onHide={onHide}/>
       <Button
         onPress={onCancel}
         fullWidth

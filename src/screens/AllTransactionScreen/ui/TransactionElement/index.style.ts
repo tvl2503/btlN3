@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
 import Card from '../../../../core/Card';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import Row from '../../../../core/Row';
-import Image from '../../../../core/Image';
+// import Image from '../../../../core/Image';
 import Typography from '../../../../core/Typography';
 
 export const TransactionElementContainer = styled(Card)`

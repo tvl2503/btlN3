@@ -15,3 +15,9 @@ export const checkout = (body: CheckoutRequestBody) => {
 };
 
 export const getListCheckout = '/checkout/list';
+
+export const cancelCheckout = (billId: string, reason: string) => {
+  return request.put('/checkout/cancel/' + billId, {
+    reason
+  });
+}
